@@ -1,0 +1,57 @@
+$new-button-color: rgb(67, 88, 67);
+
+@function testafunc($color) {
+    $complement: complement($color);
+    @return $complement;
+}
+
+@mixin flexcenter() {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+@mixin flexrow() {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    // align-items: center;
+}
+
+@mixin standard-app {
+    display: grid;
+    grid-template-columns: 100%;        /* one column  */
+    grid-template-rows: 100px 95% 64px;    /* three rows  */
+    grid-template-areas: "a"
+                         "b"
+                         "c";
+    grid-gap: 3px;
+    height:90vh;
+    width: 100vw;
+    justify-items: stretch;
+}
+
+@mixin area-a {
+    grid-area: a;
+}
+
+@mixin area-b {
+    grid-area: b;
+}
+
+@mixin area-c {
+    grid-area: c;
+}
+  
+//   .area-1 {
+//     grid-area: a;
+//   }
+  
+//   .area-2 {
+//     grid-area: b;
+//   }
+  
+//   .area-3 {
+//     grid-area: c;
+//   }

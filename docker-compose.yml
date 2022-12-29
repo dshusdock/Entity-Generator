@@ -1,0 +1,12 @@
+services:
+  client:
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+      target: development
+    command: tail -f /dev/null
+    volumes:
+      - /home/dave/sandbox/testapp2/testapp:/home/project/testapp
+      - /home/project/testapp/node_modules
+    ports:
+      - '4200:4200'

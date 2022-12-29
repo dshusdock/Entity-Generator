@@ -1,0 +1,21 @@
+@use "../scss/index" as idx;
+
+.app-container {
+    @include idx.standard-app;
+    
+}
+
+.area-1 {
+    @include idx.area-a;
+    outline: 1px solid blue;
+}
+
+.area-2 {
+    @include idx.area-b;
+    outline: 1px solid blue;
+}
+
+.area-3 {
+    @include idx.area-c;
+    outline: 1px solid blue;
+}

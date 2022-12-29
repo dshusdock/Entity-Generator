@@ -6,7 +6,7 @@ services:
       target: development
     command: tail -f /dev/null
     volumes:
-      - /home/dave/sandbox/entity-generator2/entity-generator:/home/project/entity-generator
-      - /home/project/entity-generator/node_modules
+      - /home/dave/sandbox/testapp2/testapp:/home/project/testapp
+      - /home/project/testapp/node_modules
     ports:
       - '4200:4200'

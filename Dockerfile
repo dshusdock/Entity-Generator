@@ -1,6 +1,6 @@
 FROM node:16-buster As development
 
-WORKDIR /home/project/entity-generator   
+WORKDIR /home/project/testapp   
 
 RUN apt update;apt-get install -y vim 
 

@@ -21,9 +21,10 @@ export class EntityDisplayComponent implements OnInit, OnChanges {
     //this.dataSource = new MatTableDataSource(this.entityList);
   }
 
-  ngOnChanges(changes: SimpleChanges) {
+  ngOnChanges() {
 
     console.log("Detected change: " + JSON.stringify(this.entityValue));
+    if (!this.entityValue) { return }
     this.entityList.push(this.entityValue);
     if (this.table) {
       this.table.renderRows();

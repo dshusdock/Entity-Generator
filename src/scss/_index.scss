@@ -21,14 +21,14 @@ $new-button-color: rgb(67, 88, 67);
 
 @mixin standard-app {
     display: grid;
-    grid-template-columns: 100%;        /* one column  */
-    grid-template-rows: $toolbar-height 95% 64px;    /* three rows  */
+    grid-template-columns: 100;        /* one column  */
+    grid-template-rows: $toolbar-height 51em 65px;    /* three rows  */
     grid-template-areas: "a"
                          "b"
                          "c";
     grid-gap: 3px;
-    height:90vh;
-    width: 100vw;
+ /*    height:auto;
+    width: auto; */
     justify-items: stretch;
 }
 
@@ -44,7 +44,7 @@ $new-button-color: rgb(67, 88, 67);
     grid-area: c;
 }
 
-$toolbar-height: 75px;
+$toolbar-height: 85px;
   
 //   .area-1 {
 //     grid-area: a;

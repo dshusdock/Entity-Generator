@@ -8,7 +8,7 @@ import { AppMessageService } from 'src/app/services/app-message.service';
     styleUrls: ['./entity-creator.component.scss']
 })
 export class EntityCreatorComponent implements OnInit {
-    entityItem = "This is a test";
+    entityItem: any;
 
     entityForm = this.formBuilder.group({
         entityName: [''],

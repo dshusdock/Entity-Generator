@@ -8,6 +8,7 @@ import { AppMessageService } from 'src/app/services/app-message.service';
     styleUrls: ['./entity-creator.component.scss']
 })
 export class EntityCreatorComponent implements OnInit {
+    entityItem = "This is a test";
 
     entityForm = this.formBuilder.group({
         entityName: [''],
@@ -27,8 +28,7 @@ export class EntityCreatorComponent implements OnInit {
         let data: any = {};
         data.entityName = this.entityForm.get('entityName')?.value;
         data.entityDataType = this.entityForm.get('entityDataType')?.value;
-
-        console.log(JSON.stringify(data));
+        this.entityItem = data;
 
         this.messageService.sendMessage(data);
     }

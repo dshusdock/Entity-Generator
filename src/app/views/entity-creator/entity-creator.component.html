@@ -9,23 +9,13 @@
               <mat-label>Entity Name</mat-label>
               <input matInput type="text" formControlName="entityName" placeholder="someEntity" value="someEntity">
             </mat-form-field>
-
             <mat-form-field appearance="fill">
-              <mat-label>Status</mat-label>
+              <mat-label>Data Type</mat-label>
               <mat-select formControlName="entityDataType" placeholder="Data Type">
                 <mat-option value="Int">Integer</mat-option>
                 <mat-option value="string">String</mat-option>
                 <mat-option value="boolean">Boolean</mat-option>
               </mat-select>
-
-
-
-              <!-- <mat-label>Data Type</mat-label>
-              <select matNativeControl required>
-                <option value="Int">Int</option>
-                <option value="string">String</option>
-                <option value="boolean">Boolean</option>
-              </select> -->
             </mat-form-field>
           </form>
         </mat-card-content>
@@ -39,14 +29,6 @@
     </mat-card>
   </div>
   <div class="area-b">
-    <mat-card class="mc-1">
-      <mat-card-content>
-        <mat-list>
-          <mat-list-item>Pepper</mat-list-item>
-          <mat-list-item>Salt</mat-list-item>
-          <mat-list-item>Paprika</mat-list-item>
-        </mat-list>
-      </mat-card-content>
-    </mat-card>
+    <app-entity-display [entityValue]="entityItem"></app-entity-display>
   </div>
 </div>

@@ -1,0 +1,36 @@
+.frm-lo {
+    display: grid;
+    grid-template-columns: 30% 70%;        /* one column  */
+    grid-template-rows: 100%;    /* three rows  */
+    grid-template-areas: "a" "b";
+    grid-gap: 5px;
+    height:100%;
+    width: 100%;
+    justify-items: stretch;
+}
+
+.area-a {
+    outline: 2px solid gray;
+}
+
+.area-b {
+    outline: 2px solid gray;
+}
+
+.mc-1 {
+    margin: 3em;
+}
+
+.example-form {
+    min-width: 150px;
+    max-width: 500px;
+    width: 50%;
+  }
+  
+  .example-full-width {
+    width: 75%;
+  }
+
+  button {
+    width: 7em;
+  }

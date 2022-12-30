@@ -8,6 +8,7 @@
 .area-1 {
     @include idx.area-a;
     outline: 1px solid blue;
+    height: idx.$toolbar-height;
 }
 
 .area-2 {

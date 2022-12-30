@@ -1,0 +1,14 @@
+@use "../../../scss/index" as idx;
+
+
+.example-spacer {
+    flex: 1 1 auto;
+}
+
+.tb-div1 {
+    height: idx.$toolbar-height;
+}
+
+.menu {
+    margin-right: 2em;
+}

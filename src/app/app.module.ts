@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from 'src/material.module';
 import { ViewsModule } from './views/views.module';
+import { AppMessageService } from './services/app-message.service';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,7 @@ import { ViewsModule } from './views/views.module';
     MaterialModule,
     ViewsModule
   ],
-  providers: [],
+  providers: [AppMessageService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

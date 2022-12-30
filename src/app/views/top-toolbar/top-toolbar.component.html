@@ -1,15 +1,29 @@
 <div>
-    <mat-toolbar color="primary">
-        <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
-         <mat-icon>menu</mat-icon>
-       </button>
-       <span>My App</span>
-       <span class="example-spacer"></span>
-       <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
-         <mat-icon>favorite</mat-icon>
-       </button>
-       <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
-        <mat-icon>share</mat-icon>
+    <mat-toolbar class="tb-div1" color="primary">
+      <button mat-icon-button class="menu" [matMenuTriggerFor]="menu1">
+        <mat-menu #menu1="matMenu">
+          <button mat-menu-item (click)="onCreateEntity()">Create Entities</button>
+          <button mat-menu-item (click)="onSaveFile()">Download Entity File</button>
+          <button mat-menu-item (click)="onResetList()">Reset Entity List</button>
+        </mat-menu>
+        <mat-icon>menu</mat-icon>
       </button>
-     </mat-toolbar>
+       <span>Entity Generator</span>
+       <span class="example-spacer"></span>
+       <button mat-icon-button class="" [matMenuTriggerFor]="menu2">
+        <mat-menu #menu2="matMenu">
+          <button mat-menu-item>Item 1</button>
+          <button mat-menu-item>Item 2</button>
+        </mat-menu>
+  
+        <mat-icon>settings</mat-icon>
+      </button>
+      <button mat-icon-button class="menu" [matMenuTriggerFor]="menu3">
+        <mat-menu #menu3="matMenu">
+          <button mat-menu-item>Logout</button>
+          <!-- <button mat-menu-item>Item 2</button> -->
+        </mat-menu>
+        <mat-icon>account_circle</mat-icon>
+      </button>
+    </mat-toolbar>
 </div>

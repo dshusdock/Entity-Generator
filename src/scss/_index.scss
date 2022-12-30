@@ -21,7 +21,7 @@ $new-button-color: rgb(67, 88, 67);
 
 @mixin standard-app {
     display: grid;
-    grid-template-columns: 100;        /* one column  */
+    grid-template-columns: 100%;        /* one column  */
     grid-template-rows: $toolbar-height 51em 65px;    /* three rows  */
     grid-template-areas: "a"
                          "b"

@@ -11,17 +11,18 @@
     height: idx.$toolbar-height;
     // margin: 0 194px;
     padding: 0 194px;
-    background-color: #00bcd4;
+    background-color: #607d8b;
 }
 
 .area-2 {
     @include idx.area-b;
-    outline: 1px solid blue;
+    /* outline: 1px solid blue; */
     margin: 0 194px;
 }
 
 .area-3 {
     @include idx.area-c;
-    outline: 1px solid blue;
-    margin: 0 194px;
+    /* outline: 1px solid blue; */
+    padding: 0 194px;
+    background-color: #607d8b;
 }

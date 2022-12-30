@@ -5,6 +5,7 @@ p {
 }
 
 .mc-1 {
+    display: flex;
     height: 90%;
     margin: 3em;
     overflow: hidden;
@@ -39,7 +40,7 @@ p {
 }
 
 .mat-card.scrollable-content {
-    overflow: hidden;
+   /*  overflow: hidden; */
     display: flex;
     flex-direction: column;
   

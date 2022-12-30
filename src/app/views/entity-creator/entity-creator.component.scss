@@ -5,7 +5,7 @@
     grid-template-areas: "a" "b";
     grid-gap: 5px;
     height:100%;
-    width: 100em;
+   /*  width: 100em; */
     justify-items: stretch;
    
 }
@@ -20,6 +20,7 @@
 
 .mc-1 {
     margin: 3em;
+    width: 30em;
 }
 
 .example-form {

@@ -5,11 +5,11 @@
         <mat-card-header style="margin-bottom: 2em;">Entity Parameters</mat-card-header>
         <mat-card-content>
           <form [formGroup]="entityForm">
-            <mat-form-field class="example-full-width">
+            <mat-form-field appearance="outline" class="example-full-width">
               <mat-label>Entity Name</mat-label>
               <input matInput type="text" formControlName="entityName" placeholder="someEntity" value="someEntity">
             </mat-form-field>
-            <mat-form-field appearance="fill">
+            <mat-form-field appearance="outline">
               <mat-label>Data Type</mat-label>
               <mat-select formControlName="entityDataType" placeholder="Data Type">
                 <mat-option value="Int">Integer</mat-option>

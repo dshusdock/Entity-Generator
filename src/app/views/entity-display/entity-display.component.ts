@@ -52,6 +52,15 @@ export class EntityDisplayComponent implements OnInit, OnChanges {
 
     }
 
+    onSelectIndividual(entityName: string) {
+
+        let index = this.entityList.findIndex(el => el.entityName === entityName);
+        if (!this.entityList[index].checked) {
+            this.entityList[index].checked = true;
+        }
+        
+    }
+
     onSelectAll() {
         this.clearAllCB = !this.clearAllCB;
         this.toggleCBs(this.clearAllCB);
@@ -75,11 +84,18 @@ export class EntityDisplayComponent implements OnInit, OnChanges {
     }
 
     onDelete() {
-        this.entityList.forEach((el, index) => {
-            if (el.checked) {
-                this.entityList.splice(index);
+        // this.entityList.forEach((el, index) => {
+        //     if (el.checked) {
+        //         this.entityList.splice(index, 1);
+        //     }
+        // });
+
+        for (var i = this.entityList.length - 1; i >= 0; i--) {
+            if (this.entityList[i].checked) {
+                this.entityList.splice(i, 1);
             }
-        });
+        }
+           
 
         if (this.clearAllCB) {
             this.selectAll.toggle();

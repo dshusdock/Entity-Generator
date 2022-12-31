@@ -1,19 +1,21 @@
-<div>
+<div #entity_display>
   <mat-card class="mc-1 scrollable-content">
     <mat-card-content class="mcc-1">
       <table mat-table [dataSource]="entityList" class="mat-elevation-z8 demo-table">
         <ng-container matColumnDef="entityName">
           <th mat-header-cell *matHeaderCellDef class="mhc-1">
-            <mat-checkbox class="mcb-1"></mat-checkbox>
+            <mat-checkbox #selectAllCB class="mcb-1" (click)="onSelectAll()"></mat-checkbox>
             <p style="margin-left: 62px;">Entity Name</p>
           </th>
           <td mat-cell *matCellDef="let element">
-            <mat-checkbox class="mcb-2"></mat-checkbox>
+            <mat-checkbox #checkboxes class="mcb-2"></mat-checkbox>
             {{element.entityName}}
           </td>
         </ng-container>
         <ng-container matColumnDef="entityDataType">
-          <th mat-header-cell *matHeaderCellDef> <p>Entity DataType</p> </th>
+          <th mat-header-cell *matHeaderCellDef>
+            <p>Entity DataType</p>
+          </th>
           <td mat-cell *matCellDef="let element"> {{element.entityDataType}} </td>
         </ng-container>
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
@@ -22,10 +24,9 @@
     </mat-card-content>
     <mat-card-actions>
       <div>
-        <button mat-raised-button >Edit</button>
-        <button mat-raised-button style="margin-left: 2em;">Delete</button>
+        <button mat-raised-button>Edit</button>
+        <button mat-raised-button style="margin-left: 2em;" (click)="onDelete()">Delete</button>
       </div>
     </mat-card-actions>
   </mat-card>
 </div>
-

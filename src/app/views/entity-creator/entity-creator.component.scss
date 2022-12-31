@@ -1,26 +1,32 @@
 .frm-lo {
-    display: grid;
-    grid-template-columns: 30% 70%;        /* one column  */
-    grid-template-rows: 100%;    /* three rows  */
-    grid-template-areas: "a" "b";
-    grid-gap: 5px;
-    height:100%;
-   /*  width: 100em; */
-    justify-items: stretch;
+  //   display: grid;
+  //   grid-template-columns: 30% 70%;        /* one column  */
+  //   grid-template-rows: 100%;    /* three rows  */
+  //   grid-template-areas: "a" "b";
+  //   grid-gap: 5px;
+  //   height:100%;
+  //  /*  width: 100em; */
+  //   justify-items: stretch;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
    
 }
 
 .area-a {
-    // outline: 2px solid gray;
+   /*  outline: 2px solid gray; */
+    min-width: 25em;
 }
 
 .area-b {
-    // outline: 2px solid gray;
+   /*  outline: 2px solid gray; */
+    min-width: 50em;
 }
 
 .mc-1 {
     margin: 3em;
-    width: 30em;
+    
 }
 
 .example-form {

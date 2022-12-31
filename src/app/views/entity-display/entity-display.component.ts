@@ -84,12 +84,6 @@ export class EntityDisplayComponent implements OnInit, OnChanges {
     }
 
     onDelete() {
-        // this.entityList.forEach((el, index) => {
-        //     if (el.checked) {
-        //         this.entityList.splice(index, 1);
-        //     }
-        // });
-
         for (var i = this.entityList.length - 1; i >= 0; i--) {
             if (this.entityList[i].checked) {
                 this.entityList.splice(i, 1);

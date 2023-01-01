@@ -13,6 +13,7 @@ p {
 
 .mcc-1 {
     // overflow-y: scroll;
+    height: 650px;
 }
 
 .mcb-1 {
@@ -31,12 +32,19 @@ p {
     // flex-direction: row;
 }
 
+.mca-1 {
+    position: absolute;
+    bottom: 2em;
+    left: 5em;
+}
+
+.mpag-1 {
+    position: absolute;
+    bottom: 6em;
+}
+
 .demo-table {
     width: 100%;
-
-    p {
-
-    }
 }
 
 .mat-card.scrollable-content {
@@ -52,6 +60,13 @@ p {
       overflow-y: auto;
     }
 
-    height: 700px;
+    
     justify-content: space-between;
+  }
+
+  .tab-div1 {
+    height: 600px;
+    width: 675px;
+    max-width: 100%;
+    overflow: auto;
   }

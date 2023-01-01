@@ -1,6 +1,7 @@
-import { Component, Input, OnChanges, OnInit, QueryList, SimpleChanges, ViewChild, ViewChildren } from '@angular/core';
+import { AfterViewInit, Component, Input, OnChanges, OnInit, QueryList, SimpleChanges, ViewChild, ViewChildren } from '@angular/core';
 import { MatCheckbox } from '@angular/material/checkbox';
-import { MatTable } from '@angular/material/table';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatTable, MatTableDataSource } from '@angular/material/table';
 import { EntityInfo } from 'src/app/constants/datatypes';
 import { EntityInfoService } from 'src/app/services/entity-info.service';
 
@@ -10,17 +11,16 @@ import { EntityInfoService } from 'src/app/services/entity-info.service';
     templateUrl: './entity-display.component.html',
     styleUrls: ['./entity-display.component.scss']
 })
-export class EntityDisplayComponent implements OnInit, OnChanges {
+export class EntityDisplayComponent implements OnInit, OnChanges, AfterViewInit {
     @Input() entityValue: any = {};
     @ViewChild(MatTable) table!: MatTable<any>;
     @ViewChildren("checkboxes") checkboxes!: QueryList<MatCheckbox>;
     @ViewChild("selectAllCB") selectAll!: MatCheckbox;
     entityList: EntityInfo[] = [];
     displayedColumns: string[] = ['entityName', 'entityDataType'];
-    dataSource: any = [{ entityName: "test", entityDataType: "string" }];
+    // dataSource: any = [{ entityName: "test", entityDataType: "string" }];
     itemChecked = true;
     clearAllCB = false;
-
 
     constructor(private readonly entityInfoSvc: EntityInfoService) { 
 
@@ -46,6 +46,10 @@ export class EntityDisplayComponent implements OnInit, OnChanges {
         }
 
         this.entityInfoSvc.updateEntityInfo(this.entityList);
+        
+    }
+
+    ngAfterViewInit() {
     }
 
     setAll(val: any) {

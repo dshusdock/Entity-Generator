@@ -7,6 +7,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from 'src/material.module';
 import { ViewsModule } from './views/views.module';
 import { AppMessageService } from './services/app-message.service';
+import { SchemaFileCreatorService } from './services/schema-file-creator.service';
+import { EntityInfoService } from './services/entity-info.service';
 
 @NgModule({
   declarations: [
@@ -19,7 +21,7 @@ import { AppMessageService } from './services/app-message.service';
     MaterialModule,
     ViewsModule
   ],
-  providers: [AppMessageService],
+  providers: [AppMessageService, SchemaFileCreatorService, EntityInfoService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

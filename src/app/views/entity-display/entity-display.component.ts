@@ -1,13 +1,9 @@
 import { Component, Input, OnChanges, OnInit, QueryList, SimpleChanges, ViewChild, ViewChildren } from '@angular/core';
 import { MatCheckbox } from '@angular/material/checkbox';
 import { MatTable } from '@angular/material/table';
+import { EntityInfo } from 'src/app/constants/datatypes';
+import { EntityInfoService } from 'src/app/services/entity-info.service';
 
-
-type EntityInfo = {
-    entityName: string;
-    entityDataType: string;
-    checked: boolean
-}
 
 @Component({
     selector: 'app-entity-display',
@@ -26,7 +22,9 @@ export class EntityDisplayComponent implements OnInit, OnChanges {
     clearAllCB = false;
 
 
-    constructor() { }
+    constructor(private readonly entityInfoSvc: EntityInfoService) { 
+
+    }
 
     ngOnInit(): void {
 
@@ -46,6 +44,8 @@ export class EntityDisplayComponent implements OnInit, OnChanges {
         if (this.table) {
             this.table.renderRows();
         }
+
+        this.entityInfoSvc.updateEntityInfo(this.entityList);
     }
 
     setAll(val: any) {

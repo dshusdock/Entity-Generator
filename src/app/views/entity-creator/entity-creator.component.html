@@ -1,6 +1,11 @@
 <div class="frm-lo">
   <div class="area-a">
     <mat-card class="mc-1">
+      <mat-card-header style="margin-bottom: 2em;">Entity Name</mat-card-header>
+    </mat-card>
+  </div>
+  <div class="area-b">
+    <mat-card class="mc-1">
       <div style="margin-left: 2em;">
         <mat-card-header style="margin-bottom: 2em;">Entity Parameters</mat-card-header>
         <mat-card-content>
@@ -12,7 +17,7 @@
             <mat-form-field appearance="outline">
               <mat-label>Data Type</mat-label>
               <mat-select formControlName="entityDataType" placeholder="Data Type">
-                <mat-option value="Int">Integer</mat-option>
+                <mat-option value="number">Number</mat-option>
                 <mat-option value="string">String</mat-option>
                 <mat-option value="boolean">Boolean</mat-option>
               </mat-select>
@@ -28,7 +33,7 @@
       </div>
     </mat-card>
   </div>
-  <div class="area-b">
+  <div class="area-c">
     <app-entity-display [entityValue]="entityItem"></app-entity-display>
   </div>
 </div>

@@ -1,0 +1,16 @@
+import { AbstractDocument } from '@app/database';
+import { Schema, Prop, SchemaFactory } from '@nestjs/mongoose';
+
+@Schema({ versionKey: false })
+export class BoPbiReportDocument extends AbstractDocument {
+
+  @Prop()
+  clientCity: string;
+
+  @Prop()
+  projectNumber: number;
+
+  
+
+}
+export const BoPbiReportSchema = SchemaFactory.createForClass(BoPbiReportDocument);

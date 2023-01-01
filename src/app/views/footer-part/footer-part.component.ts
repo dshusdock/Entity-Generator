@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { EntityFileCreatorService } from 'src/app/services/entity-file-creator.service';
+// import { SchemaFileCreatorService } from 'src/app/services/schema-file-creator.service';
 
 @Component({
   selector: 'app-footer-part',
@@ -7,9 +9,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FooterPartComponent implements OnInit {
 
-  constructor() { }
+  constructor(private readonly entityFileCreatorSvc: EntityFileCreatorService) { }
 
   ngOnInit(): void {
+  }
+
+  onGenerateClick() {
+    let file = this.entityFileCreatorSvc.generateFile();
+    const link = document.createElement("a");
+    link.href = URL.createObjectURL(file);
+    link.download = "schemafile.ts";
+    link.click();
+    link.remove();
   }
 
 }

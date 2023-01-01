@@ -10,7 +10,12 @@ import { AppMessageService } from 'src/app/services/app-message.service';
 export class EntityCreatorComponent implements OnInit {
     entityItem: any;
 
+    dataForm = this.formBuilder.group({
+        dataClassName: [''],
+    });
+
     entityForm = this.formBuilder.group({
+        dataClassName: [''],
         entityName: [''],
         entityDataType: [''],
     });

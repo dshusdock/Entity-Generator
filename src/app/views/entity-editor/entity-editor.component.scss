@@ -1,0 +1,50 @@
+.frm-lo { 
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+     
+  }
+  
+  .mff-1 {
+    width: 250px;;
+  
+  }
+  
+  .area-a {
+    min-width: 25em;
+  }
+  
+  .area-b {
+     min-width: 25em;
+  }
+  
+  .area-c {
+    min-width: 50em;
+  }
+  
+  .mc-1 {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      margin: 3em;
+  }
+  
+  .example-form {
+      min-width: 150px;
+      max-width: 500px;
+      width: 50%;
+    }
+    
+    .example-full-width {
+      width: 75%;
+    }
+  
+    button {
+      width: 7em;
+    }
+  
+    .form-1 {
+      display: flex;
+      flex-direction: column;
+    }

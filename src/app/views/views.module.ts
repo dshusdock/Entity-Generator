@@ -6,6 +6,7 @@ import { EntityCreatorComponent } from './entity-creator/entity-creator.componen
 import { ReactiveFormsModule } from '@angular/forms';
 import { EntityDisplayComponent } from './entity-display/entity-display.component';
 import { FooterPartComponent } from './footer-part/footer-part.component';
+import { EntityEditorComponent } from './entity-editor/entity-editor.component';
 
 
 
@@ -14,7 +15,8 @@ import { FooterPartComponent } from './footer-part/footer-part.component';
     TopToolbarComponent,
     EntityCreatorComponent,
     EntityDisplayComponent,
-    FooterPartComponent
+    FooterPartComponent,
+    EntityEditorComponent
   ],
   imports: [
     CommonModule,

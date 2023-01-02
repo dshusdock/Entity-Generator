@@ -1,0 +1,28 @@
+<mat-card class="mc-1">
+    <div style="margin-left: 2em;">
+      <mat-card-header style="margin-bottom: 2em;">Entity Parameters</mat-card-header>
+      <mat-card-content>
+        <form [formGroup]="entityForm" class="form-1">
+          <mat-form-field appearance="outline" class="example-full-width">
+            <mat-label>Entity Name</mat-label>
+            <input matInput type="text" formControlName="entityName" placeholder="someEntity" value="someEntity">
+          </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-label>Data Type</mat-label>
+            <mat-select formControlName="entityDataType" placeholder="Data Type">
+              <mat-option value="number">Number</mat-option>
+              <mat-option value="string">String</mat-option>
+              <mat-option value="boolean">Boolean</mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-checkbox formControlName="entityNullable">Nullable?</mat-checkbox>
+        </form>
+      </mat-card-content>
+      <mat-card-actions>
+        <div>
+          <button mat-raised-button (click)="onUpdateClick()">Update</button>
+          <button mat-raised-button style="margin-left: 2em;" (click)="onCancelClick()">Cancel</button>
+        </div>
+      </mat-card-actions>
+    </div>
+  </mat-card>

@@ -14,6 +14,11 @@
    
 }
 
+.mff-1 {
+  width: 250px;;
+
+}
+
 .area-a {
   min-width: 25em;
 }
@@ -29,8 +34,11 @@
 }
 
 .mc-1 {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     margin: 3em;
-    
 }
 
 .example-form {
@@ -45,4 +53,9 @@
 
   button {
     width: 7em;
+  }
+
+  .form-1 {
+    display: flex;
+    flex-direction: column;
   }

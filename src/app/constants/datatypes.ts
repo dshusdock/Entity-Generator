@@ -1,5 +1,6 @@
 export type EntityInfo = {
-    entityName: string;
-    entityDataType: string;
+    entityName: string | null | undefined;
+    entityDataType: string | null | undefined;
+    entityNullable: boolean,
     checked: boolean
 }

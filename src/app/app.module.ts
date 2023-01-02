@@ -9,10 +9,12 @@ import { ViewsModule } from './views/views.module';
 import { AppMessageService } from './services/app-message.service';
 import { SchemaFileCreatorService } from './services/schema-file-creator.service';
 import { EntityInfoService } from './services/entity-info.service';
+import { TestthisComponent } from './testthis/testthis.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    TestthisComponent
   ],
   imports: [
     BrowserModule,

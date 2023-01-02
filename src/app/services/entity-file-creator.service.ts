@@ -7,7 +7,7 @@ import { EntityInfoService } from './entity-info.service';
 export class EntityFileCreatorService {
     entityClassName = "";
     FIELD_STR_TYPE = "@Field({ nullable: true , description: '' })";
-    FIELD_NBR_TYPE = "@Field(() => Int, { nullable: true , description: '' })"
+    // FIELD_NBR_TYPE = `@Field(() => Int, { nullable: ${nullableVal} , description: '' })`;
     FIELD_BOOL_TYPE = "@Field({ nullable: true , description: '' })";
 
     constructor(private readonly entityInfoSvc: EntityInfoService) { }
@@ -15,15 +15,16 @@ export class EntityFileCreatorService {
     generateFile(): Blob {
         let body: string = ``;
         this.entityClassName = "BoPbiReport";
+        let nullableVal = "true";
 
         let list = this.entityInfoSvc.getEntityList();
 
         body = body + schema_header(this.entityClassName);
         list.forEach((el) => {
             if (el.entityDataType === "number") {
-                body = body + this.FIELD_NBR_TYPE;
+                body = body + numberType(el.entityNullable? "true": "false");
             } else if (el.entityDataType === "string") {
-                body = body + this.FIELD_STR_TYPE;
+                body = body + stringOrBoolType(el.entityNullable? "true": "false");
             } else {
                 body = body + this.FIELD_BOOL_TYPE;
             }
@@ -51,4 +52,12 @@ function schema_header(schemaClassName: string) {
     
     `;
 
+}
+
+function numberType(nullableVal: string) {
+    return `@Field(() => Int, { nullable: ${nullableVal} , description: '' })`;
+}
+
+function stringOrBoolType(nullableVal: string) {
+    return `@Field(() => Int, { nullable: ${nullableVal} , description: '' })`;
 }

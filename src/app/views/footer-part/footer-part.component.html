@@ -1,3 +1,13 @@
-<mat-toolbar color="primary">
-    <button mat-raised-button (click)="onGenerateClick()">Generate</button>
+<mat-toolbar color="primary" class="mtb-1">
+    <form [formGroup]="fileForm" class="form-1">
+        <button mat-raised-button (click)="onGenerateClick()">Generate</button>
+        <mat-form-field appearance="outline" class="mff-1">
+            <mat-label>File to Download</mat-label>
+            <mat-select formControlName="fileChoice" placeholder="Data Type">
+                <mat-option value="entity.ts">Entity</mat-option>
+                <mat-option value="schema.ts">Schema</mat-option>
+                <mat-option value="input.ts">Input</mat-option>
+            </mat-select>
+        </mat-form-field>
+    </form>
 </mat-toolbar>

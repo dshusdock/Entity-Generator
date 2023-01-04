@@ -7,6 +7,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { EntityDisplayComponent } from './entity-display/entity-display.component';
 import { FooterPartComponent } from './footer-part/footer-part.component';
 import { EntityEditorComponent } from './entity-editor/entity-editor.component';
+import { ValidatorChooserComponent } from './validator-chooser/validator-chooser.component';
 
 
 
@@ -16,7 +17,8 @@ import { EntityEditorComponent } from './entity-editor/entity-editor.component';
     EntityCreatorComponent,
     EntityDisplayComponent,
     FooterPartComponent,
-    EntityEditorComponent
+    EntityEditorComponent,
+    ValidatorChooserComponent
   ],
   imports: [
     CommonModule,

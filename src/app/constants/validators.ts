@@ -1,26 +1,34 @@
-export const validators: any[] = [
+export const COMMON_VALS: any[] = [
     { val: "@IsDefined(value: any)	", desc: "Checks if value is defined (!== undefined, !== null). This is the only decorator that ignores skipMissingProperties option." },
-    { val: "@IsOptional()	", desc: "Checks if given value is empty (=== null, === undefined) and if so, ignores all the validators on the property."},
+    { val: "@IsOptional()	", desc: "Checks if given value is empty (=== null, === undefined) and if so, ignores all the validators on the property." },
     { val: "@Equals(comparison: any)	", desc: "Checks if value equals (\"===\") comparison." },
     { val: "@NotEquals(comparison: any)	", desc: "Checks if value not equal (\"!==\") comparison." },
     { val: "@IsEmpty()	", desc: "Checks if given value is empty (=== '', === null, === undefined)." },
     { val: "@IsNotEmpty()	", desc: "Checks if given value is not empty (!== '', !== null, !== undefined)." },
     { val: "@IsIn(values: any[])	", desc: "Checks if value is in an array of allowed values." },
-    { val: "@IsNotIn(values: any[])	", desc: "Checks if value is not in an array of disallowed values." },
+    { val: "@IsNotIn(values: any[])	", desc: "Checks if value is not in an array of disallowed values." }];
+
+export const TYPE_VALS: any[] = [
     { val: "@IsBoolean()	", desc: "Checks if a value is a boolean." },
     { val: "@IsDate()	", desc: "Checks if the value is a date." },
     { val: "@IsString()	", desc: "Checks if the value is a string." },
     { val: "@IsNumber(options: IsNumberOptions)	", desc: "Checks if the value is a number." },
     { val: "@IsInt()	", desc: "Checks if the value is an integer number." },
     { val: "@IsArray()	", desc: "Checks if the value is an array" },
-    { val: "@IsEnum(entity: object)	", desc: "Checks if the value is a valid enum" },
+    { val: "@IsEnum(entity: object)	", desc: "Checks if the value is a valid enum" }];
+
+export const NUMBER_VALS: any[] = [
     { val: "@IsDivisibleBy(num: number)	", desc: "Checks if the value is a number that's divisible by another." },
     { val: "@IsPositive()	", desc: "Checks if the value is a positive number greater than zero." },
     { val: "@IsNegative()	", desc: "Checks if the value is a negative number smaller than zero." },
     { val: "@Min(min: number)	", desc: "Checks if the given number is greater than or equal to given number." },
-    { val: "@Max(max: number)	", desc: "Checks if the given number is less than or equal to given number." },
+    { val: "@Max(max: number)	", desc: "Checks if the given number is less than or equal to given number." }];
+
+export const DATE_VALS: any[] = [
     { val: "@MinDate(date: Date | (() => Date))	", desc: "Checks if the value is a date that's after the specified date." },
-    { val: "@MaxDate(date: Date | (() => Date))	", desc: "Checks if the value is a date that's before the specified date." },
+    { val: "@MaxDate(date: Date | (() => Date))	", desc: "Checks if the value is a date that's before the specified date." }];
+
+export const STRINGTYPE_VALS: any[] = [
     { val: "@IsBooleanString()	", desc: "Checks if a string is a boolean (e.g. is \"true\" or \"false\" or \"1\", \"0\")." },
     { val: "@IsDateString()	", desc: "Alias for XXXXXXXIsISO8601()." },
     { val: "@IsNumberString(options?: IsNumericOptions)	", desc: "Checks if a string is a number." },
@@ -97,13 +105,16 @@ export const validators: any[] = [
     { val: "@IsISSN(options?: IsISSNOptions)	", desc: "Checks if the string is a ISSN." },
     { val: "@IsISRC()	", desc: "Checks if the string is a ISRC." },
     { val: "@IsRFC3339()	", desc: "Checks if the string is a valid RFC 3339 date." },
-    { val: "@IsStrongPassword(options?: IsStrongPasswordOptions)	", desc: "Checks if the string is a strong password." },
+    { val: "@IsStrongPassword(options?: IsStrongPasswordOptions)	", desc: "Checks if the string is a strong password." }];
+
+export const ARRAY_VALS: any[] = [
     { val: "@ArrayContains(values: any[])	", desc: "Checks if array contains all values from the given array of values." },
     { val: "@ArrayNotContains(values: any[])	", desc: "Checks if array does not contain any of the given values." },
     { val: "@ArrayNotEmpty()	", desc: "Checks if given array is not empty." },
     { val: "@ArrayMinSize(min: number)	", desc: "Checks if the array's length is greater than or equal to the specified number." },
     { val: "@ArrayMaxSize(max: number)	", desc: "Checks if the array's length is less or equal to the specified number." },
-    { val: "@ArrayUnique(identifier?: (o) => any)	", desc: "Checks if all array's values are unique. Comparison for objects is reference-based. Optional function can be speciefied which return value will be used for the comparsion." },
+    { val: "@ArrayUnique(identifier?: (o) => any)	", desc: "Checks if all array's values are unique. Comparison for objects is reference-based. Optional function can be speciefied which return value will be used for the comparsion." }];
+
+export const OTHER_VALS: any[] = [
     { val: "@IsInstance(value: any)	", desc: "Checks if the property is an instance of the passed value." },
-    { val: "@Allow()	", desc: "Prevent stripping off the property when no other constraint is specified for it." }
-]
+    { val: "@Allow()	", desc: "Prevent stripping off the property when no other constraint is specified for it." }];

@@ -1,9 +1,35 @@
-.macc-1 {
+/* .macc-1 {
     height: 10em;
     width: 14em;
-  }
-  
+  } */
+
 .mep-1 {
-    height: inherit;
-    width: max-content;
+  height: inherit;
+  width: max-content;
 }
+
+.val-table {
+  width: 100%;
+}
+
+.table-div {
+  display: flex;
+  flex-direction: row;
+  /* justify-content: space-between; */
+ /*  width: 15em; */
+}
+
+.desc-div {
+ /*  outline: 1px solid white; */
+  width: 300px;
+  height: 300px;
+  margin-top: 50px;
+  margin-left: 85px;
+
+  
+}
+
+td:hover {
+  background-color: #303030;
+}
+

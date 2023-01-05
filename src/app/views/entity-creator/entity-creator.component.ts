@@ -66,7 +66,7 @@ export class EntityCreatorComponent implements OnInit {
     onValidatorClick() {
 
         const dialogRef = this.dialog.open(ValidatorChooserComponent, {
-            width: "520px",
+            width: "720px",
             height: "750px",
             data: {}
         });

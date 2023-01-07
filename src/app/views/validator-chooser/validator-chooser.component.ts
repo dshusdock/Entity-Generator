@@ -19,4 +19,8 @@ export class ValidatorChooserComponent implements OnInit {
     console.log("Got hover event: " + e);
   }
 
+  onMouseDown(event: any) {
+    console.log(JSON.stringify(event));
+  }
+
 }

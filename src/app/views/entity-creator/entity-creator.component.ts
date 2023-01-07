@@ -27,6 +27,9 @@ export class EntityCreatorComponent implements OnInit {
         validators: ['']
     });
 
+    dialogRight = "200px";
+    validatorCheckbox = false;
+
     constructor(private readonly formBuilder: FormBuilder,
         private readonly messageService: AppMessageService,
         private readonly dialog: MatDialog) { }
@@ -65,10 +68,18 @@ export class EntityCreatorComponent implements OnInit {
 
     onValidatorClick() {
 
+        if (this.validatorCheckbox) {
+            this.validatorCheckbox = false;
+            return;
+        }
+
+        this.validatorCheckbox = true;
+
         const dialogRef = this.dialog.open(ValidatorChooserComponent, {
             width: "720px",
             height: "750px",
-            data: {}
+            data: {},
+            position: { top: "50px", right: this.dialogRight }
         });
 
         dialogRef.afterClosed().subscribe((result) => {

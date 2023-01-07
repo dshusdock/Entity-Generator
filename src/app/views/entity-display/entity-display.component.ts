@@ -19,7 +19,7 @@ export class EntityDisplayComponent implements OnInit, OnChanges, AfterViewInit 
     @ViewChildren("checkboxes") checkboxes!: QueryList<MatCheckbox>;
     @ViewChild("selectAllCB") selectAll!: MatCheckbox;
     entityList: EntityInfo[] = [];
-    displayedColumns: string[] = ['entityName', 'entityDataType', 'entityNullable'];
+    displayedColumns: string[] = ['entityName', 'entityDataType', 'entityNullable', 'validators'];
     // dataSource: any = [{ entityName: "test", entityDataType: "string" }];
     itemChecked = true;
     clearAllCB = false;

@@ -1,128 +1,41 @@
-<div class="macc-1" cdkDrag cdkDragRootElement=".cdk-overlay-pane" cdkDragHandle >
-  <h1 mat-dialog-title >Validator Selector</h1>
-  <mat-tab-group fitInkBarToContent animationDuration="5ms">
-    <mat-tab label="Common">
-      <div class="table-div">
-        <div>
-        <table mat-table [dataSource]="commonData" class="val-table">
-          <ng-container matColumnDef="decorator">
-            <th mat-header-cell *matHeaderCellDef class="">
-              <p>Decorator</p>
-            </th>
-            <td mat-cell *matCellDef="let element" (mouseover)="onMouseOver(element.val)">
-              <mat-checkbox #checkboxes class=""></mat-checkbox>
-              {{element.val}}
-            </td>
-          </ng-container>
-          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-          <tr mat-row *matRowDef="let row; columns: displayedColumns;" class="" ></tr>
-        </table>
-      </div>
-      <div class="desc-div">
-        <p>Checks if value is defined (!== undefined, !== null). This is the only decorator that ignores skipMissingProperties option.</p>
-      </div>
-      </div>
-    </mat-tab>
-    <mat-tab label="Type">
-      <div class="table-div">
-        <div>
-        <table mat-table [dataSource]="typeVals" class="val-table">
-          <ng-container matColumnDef="decorator">
-            <th mat-header-cell *matHeaderCellDef class="">
-              <p>Decorator</p>
-            </th>
-            <td mat-cell *matCellDef="let element" (mouseover)="onMouseOver(element.val)">
-              <mat-checkbox #checkboxes class=""></mat-checkbox>
-              {{element.val}}
-            </td>
-          </ng-container>
-          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-          <tr mat-row *matRowDef="let row; columns: displayedColumns;" class="" ></tr>
-        </table>
-      </div>
-      <div class="desc-div">
-        <p>Checks if value is defined (!== undefined, !== null). This is the only decorator that ignores skipMissingProperties option.</p>
-      </div>
-      </div>
-    </mat-tab>
-    <mat-tab label="Number">
-      <div class="table-div">
-        <div>
-        <table mat-table [dataSource]="numberVals" class="val-table">
-          <ng-container matColumnDef="decorator">
-            <th mat-header-cell *matHeaderCellDef class="">
-              <p>Decorator</p>
-            </th>
-            <td mat-cell *matCellDef="let element" (mouseover)="onMouseOver(element.val)">
-              <mat-checkbox #checkboxes class=""></mat-checkbox>
-              {{element.val}}
-            </td>
-          </ng-container>
-          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-          <tr mat-row *matRowDef="let row; columns: displayedColumns;" class="" ></tr>
-        </table>
-      </div>
-      <div class="desc-div">
-        <p>Checks if value is defined (!== undefined, !== null). This is the only decorator that ignores skipMissingProperties option.</p>
-      </div>
-      </div>
-    </mat-tab>
-    <mat-tab label="Date">
-      <div class="table-div">
-        <div>
-        <table mat-table [dataSource]="dateVals" class="val-table">
-          <ng-container matColumnDef="decorator">
-            <th mat-header-cell *matHeaderCellDef class="">
-              <p>Decorator</p>
-            </th>
-            <td mat-cell *matCellDef="let element" (mouseover)="onMouseOver(element.val)">
-              <mat-checkbox #checkboxes class=""></mat-checkbox>
-              {{element.val}}
-            </td>
-          </ng-container>
-          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-          <tr mat-row *matRowDef="let row; columns: displayedColumns;" class="" ></tr>
-        </table>
-      </div>
-      <div class="desc-div">
-        <p>Checks if value is defined (!== undefined, !== null). This is the only decorator that ignores skipMissingProperties option.</p>
-      </div>
-      </div>
-    </mat-tab>
-    <mat-tab label="String-type">
-      <div class="table-div">
-        <div>
-        <table mat-table [dataSource]="stringTypeVals" class="val-table">
-          <cdk-virtual-scroll-viewport itemSize="11" class="vwport">
-          <ng-container matColumnDef="decorator">
-            <th mat-header-cell *matHeaderCellDef class="">
-              <p>Decorator</p>
-            </th>
-            <td mat-cell *matCellDef="let element" (mouseover)="onMouseOver(element.val)">
-              <mat-checkbox #checkboxes class=""></mat-checkbox>
-              {{element.val}}
-            </td>
-          </ng-container>
-          <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
-          <tr mat-row *matRowDef="let row; columns: displayedColumns;" class="" ></tr>
-        </cdk-virtual-scroll-viewport>
-        </table>
-      </div>
-      <div class="desc-div">
-        <p>Checks if value is defined (!== undefined, !== null). This is the only decorator that ignores skipMissingProperties option.</p>
-      </div>
-      </div>
-
-    </mat-tab>
-  </mat-tab-group>
+<div class="macc-1" cdkDrag cdkDragRootElement=".cdk-overlay-pane" cdkDragHandle>
+  <div class="table-div">
+    <h1 mat-dialog-title>Validator Selector</h1>
+    <mat-tab-group fitInkBarToContent animationDuration="5ms">
+      <mat-tab label="Common">
+        <div class="table-div">
+          <app-validator-table [tableData]="commonData"></app-validator-table>
+        </div>
+      </mat-tab>
+      <mat-tab label="Type">
+        <div class="table-div">
+          <app-validator-table [tableData]="typeVals"></app-validator-table>
+        </div>
+      </mat-tab>
+      <mat-tab label="Number">
+        <div class="table-div">
+          <app-validator-table [tableData]="numberVals"></app-validator-table>
+        </div>
+      </mat-tab>
+      <mat-tab label="Date" class="mt-1">
+        <div class="table-div">
+          <app-validator-table [tableData]="dateVals"></app-validator-table>
+        </div>
+      </mat-tab>
+      <mat-tab label="String-type">
+        <div class="table-div">
+          <app-validator-table [tableData]="stringTypeVals"></app-validator-table>
+        </div>
+      </mat-tab>
+    </mat-tab-group>
+  </div>
+  <div class="btn-1">
+    <button mat-raised-button style="align-self: center;">Apply</button>
+    <div style="width: 5em;"></div>
+    <button mat-raised-button mat-dialog-close style="align-self: center;">Cancel</button>
+  </div>
 </div>
 
 
 
 
-<!-- p>@IsDefined(value: any)	- Checks if value is defined (!== undefined, !== null). This is the only decorator that ignores skipMissingProperties option..</p>
-      <p>This is the primary content of the panel.</p>
-      <p>This is the primary content of the panel.</p>
-      <p>This is the primary content of the panel.</p>
-      <p>This is the primary content of the panel.</p>
-      <p>This is the primary content of the panel.</p> -->

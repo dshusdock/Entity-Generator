@@ -8,6 +8,7 @@ import { EntityDisplayComponent } from './entity-display/entity-display.componen
 import { FooterPartComponent } from './footer-part/footer-part.component';
 import { EntityEditorComponent } from './entity-editor/entity-editor.component';
 import { ValidatorChooserComponent } from './validator-chooser/validator-chooser.component';
+import { ValidatorTableComponent } from './validator-chooser/validator-table/validator-table.component';
 
 
 
@@ -18,7 +19,8 @@ import { ValidatorChooserComponent } from './validator-chooser/validator-chooser
     EntityDisplayComponent,
     FooterPartComponent,
     EntityEditorComponent,
-    ValidatorChooserComponent
+    ValidatorChooserComponent,
+    ValidatorTableComponent
   ],
   imports: [
     CommonModule,

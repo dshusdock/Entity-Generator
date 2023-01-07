@@ -79,7 +79,8 @@ export class EntityCreatorComponent implements OnInit {
             width: "720px",
             height: "750px",
             data: {},
-            position: { top: "50px", right: this.dialogRight }
+            position: { top: "50px", right: this.dialogRight },
+            panelClass: 'custom-dialog-container'
         });
 
         dialogRef.afterClosed().subscribe((result) => {

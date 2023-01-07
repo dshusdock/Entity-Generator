@@ -1,0 +1,23 @@
+<div class="top-div">
+  <div class="table-div">
+    
+    <table mat-table cdkScrollable [dataSource]="tableData" class="val-table">
+      <ng-container matColumnDef="decorator">
+        <th mat-header-cell *matHeaderCellDef class="">
+          <p>Decorator</p>
+        </th>
+        <td mat-cell *matCellDef="let element; let i = index" (mouseover)="onMouseOver(i)">
+          <mat-checkbox #checkboxes class=""></mat-checkbox>
+          {{element.val}}
+        </td>
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+      <tr mat-row matTooltip="{{desc}}"  
+          matTooltipPosition="right" 
+          *matRowDef="let row; 
+          columns: displayedColumns;" 
+          matTooltipClass="tooltipcss"
+          class=""></tr>
+    </table>
+  </div>
+</div>

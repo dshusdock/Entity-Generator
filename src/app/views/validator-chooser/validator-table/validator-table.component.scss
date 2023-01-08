@@ -1,7 +1,7 @@
 .top-div {
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
+  // justify-content: space-around;
 
 }
 
@@ -32,4 +32,8 @@ td:hover {
 
 ::ng-deep .tooltipcss {
   font-size: small;
+}
+
+::-webkit-scrollbar {
+  width: 15px;
 }

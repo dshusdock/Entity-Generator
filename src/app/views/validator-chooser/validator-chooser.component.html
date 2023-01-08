@@ -1,30 +1,30 @@
 <div class="macc-1" cdkDrag cdkDragRootElement=".cdk-overlay-pane" cdkDragHandle>
   <div class="table-div">
     <h1 mat-dialog-title>Validator Selector</h1>
-    <mat-tab-group fitInkBarToContent animationDuration="5ms">
+    <mat-tab-group fitInkBarToContent animationDuration="0ms">
       <mat-tab label="Common">
         <div class="table-div">
-          <app-validator-table [tableData]="commonData"></app-validator-table>
+          <app-validator-table [tableData]="commonData" (newItemEvent)="addItem($event)"></app-validator-table>
         </div>
       </mat-tab>
       <mat-tab label="Type">
         <div class="table-div">
-          <app-validator-table [tableData]="typeVals"></app-validator-table>
+          <app-validator-table [tableData]="typeVals" (newItemEvent)="addItem($event)"></app-validator-table>
         </div>
       </mat-tab>
       <mat-tab label="Number">
         <div class="table-div">
-          <app-validator-table [tableData]="numberVals"></app-validator-table>
+          <app-validator-table [tableData]="numberVals" (newItemEvent)="addItem($event)"></app-validator-table>
         </div>
       </mat-tab>
       <mat-tab label="Date" class="mt-1">
         <div class="table-div">
-          <app-validator-table [tableData]="dateVals"></app-validator-table>
+          <app-validator-table [tableData]="dateVals" (newItemEvent)="addItem($event)"></app-validator-table>
         </div>
       </mat-tab>
       <mat-tab label="String-type">
         <div class="table-div">
-          <app-validator-table [tableData]="stringTypeVals"></app-validator-table>
+          <app-validator-table [tableData]="stringTypeVals" (newItemEvent)="addItem($event)"></app-validator-table>
         </div>
       </mat-tab>
     </mat-tab-group>
@@ -35,7 +35,3 @@
     <button mat-raised-button mat-dialog-close style="align-self: center;">Cancel</button>
   </div>
 </div>
-
-
-
-

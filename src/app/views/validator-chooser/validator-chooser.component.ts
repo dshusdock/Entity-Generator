@@ -24,5 +24,9 @@ export class ValidatorChooserComponent implements OnInit {
         console.log('Got hover event: ' + e);
     }
 
+    addItem(item: any) {
+        console.log("Got event: " + item);
+    }
+
    
 }

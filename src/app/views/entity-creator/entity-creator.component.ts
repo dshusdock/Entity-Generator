@@ -77,7 +77,7 @@ export class EntityCreatorComponent implements OnInit {
 
         const dialogRef = this.dialog.open(ValidatorChooserComponent, {
             width: "720px",
-            height: "750px",
+            height: "770px",
             data: {},
             position: { top: "50px", right: this.dialogRight },
             panelClass: 'custom-dialog-container'

@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
-import { EntityInfo } from 'src/app/constants/datatypes';
+import { EntityInfo, MSGTYPE, RECIEVERS } from 'src/app/constants/datatypes';
 import { AppMessageService } from 'src/app/services/app-message.service';
 import { Validators } from '@angular/forms';
 import { ValidatorChooserComponent } from '../validator-chooser/validator-chooser.component';
 import { MatDialog } from '@angular/material/dialog';
+import { EntityInfoService } from 'src/app/services/entity-info.service';
+import { MessageItem } from 'src/app/constants/message-item';
 
 @Component({
     selector: 'app-entity-creator',
@@ -29,16 +31,32 @@ export class EntityCreatorComponent implements OnInit {
 
     dialogRight = "200px";
     validatorCheckbox = false;
+    entityClassName = "";
+    validators: string[] = [];
 
-    constructor(private readonly formBuilder: FormBuilder,
+    constructor(
+        private readonly formBuilder: FormBuilder,
         private readonly messageService: AppMessageService,
-        private readonly dialog: MatDialog) { }
+        private readonly dialog: MatDialog,
+        private readonly entityInfoSvc: EntityInfoService
+    ) { }
 
     ngOnInit(): void {
-        this.entityForm.valueChanges.subscribe((val) => {
-
+        this.messageService.messageQueueListener().subscribe((msg: any) => {
+            this.processIncomingMessages(msg);
         });
+
+        // Set default
         this.entityForm.get('entityDataType')?.setValue('string');
+    }
+
+    processIncomingMessages(msg: MessageItem<any>) {
+
+        switch (msg.msgtype) {
+            case MSGTYPE.EVENT_VALIDATOR_UPDATE: {
+                this.handleValidatorUpdate(msg.payload);                break;
+            }
+        }
     }
 
     onAddClick() {
@@ -46,17 +64,23 @@ export class EntityCreatorComponent implements OnInit {
 
         data.entityName = this.entityForm.get('entityName')?.value;
         if (!data.entityName) { return };
+
         data.entityDataType = this.entityForm.get('entityDataType')?.value;
         data.entityNullable = this.entityForm.get('entityNullable')?.value;
+        
+
         if (!data.entityNullable) {
             data.entityNullable = false;
         }
 
+        // validators
+        data.entityValidators = this.validators;
+        this.entityInfoSvc.entityList = data;
+
+        // This updates the entity-display component
         this.entityItem = data;
 
-        console.log("EntityInfo: " + JSON.stringify(data));
-
-        this.messageService.sendMessage(data);
+        // this.messageService.sendMessage(data);
         this.onClearClick();
     }
 
@@ -85,9 +109,27 @@ export class EntityCreatorComponent implements OnInit {
 
         dialogRef.afterClosed().subscribe((result) => {
             console.log("The dialog was closed:" + JSON.stringify(result));
-
-
         });
+    }
+
+    onUpdateClick() {
+        let name = this.dataForm.get('dataClassName')?.value;
+        if (name) {
+            this.entityInfoSvc.entityClassName = name;
+        }
+    }
+
+    onKeyUp(event: any) {
+        let name = event;
+        this.messageService.sendMessage(new MessageItem<any>(RECIEVERS.TOOLBAR,
+                                        MSGTYPE.EVENT_UPDATE_TOOLBAR,
+                                        name));
+        this.entityInfoSvc.entityClassName = name;
+    }
+
+    handleValidatorUpdate(data: any) {
+        console.log("In handleValidatorUpdate: " + JSON.stringify(data));
+        this.validators = data;
     }
 
 }

@@ -3,36 +3,36 @@ import * as schema from "../templates/schema";
 import { EntityInfoService } from './entity-info.service';
 
 @Injectable({
-  providedIn: 'root'
+    providedIn: 'root'
 })
 export class SchemaFileCreatorService {
-  schemaClassName = "";
+    schemaClassName = "";
 
-  constructor(private readonly entityInfoSvc: EntityInfoService) { 
-  }
+    constructor(private readonly entityInfoSvc: EntityInfoService) {
+    }
 
-  generateFile(): Blob {
-    let body: string = `    `;
-    this.schemaClassName = "TestSchema";
+    generateFile(): Blob {
+        let body: string = `    `;
+        this.schemaClassName = "TestSchema";
 
-    let list = this.entityInfoSvc.getEntityList();
+        let list = this.entityInfoSvc.getEntityListArray();
 
-    list.forEach((el) => {
-      body = body + `@Prop()
+        list.forEach((el) => {
+            body = body + `@Prop()
     ${el.entityName}: ${el.entityDataType};
     
     `;
-    });
+        });
 
-    let fileContent = schema_header(this.schemaClassName) + body + schema_footer(this.schemaClassName);
+        let fileContent = schema_header(this.schemaClassName) + body + schema_footer(this.schemaClassName);
 
-    const file = new Blob([fileContent], { type: "text/plain" });
-    return file;
-  }
+        const file = new Blob([fileContent], { type: "text/plain" });
+        return file;
+    }
 }
 
 function schema_header(schemaClassName: string) {
-  return `import { AbstractDocument } from '@app/database';
+    return `import { AbstractDocument } from '@app/database';
 import { Schema, Prop, SchemaFactory } from '@nestjs/mongoose';
   
 @Schema({ versionKey: false })
@@ -43,7 +43,7 @@ export class ${schemaClassName}Document extends AbstractDocument {
 }
 
 function schema_footer(schemaClassName: string) {
-  return `
+    return `
 }
 export const ${schemaClassName}Schema = SchemaFactory.createForClass(${schemaClassName}Document);
 `;

@@ -17,7 +17,7 @@ export class EntityFileCreatorService {
         this.entityClassName = "BoPbiReport";
         let nullableVal = "true";
 
-        let list = this.entityInfoSvc.getEntityList();
+        let list = this.entityInfoSvc.getEntityListArray();
 
         body = body + schema_header(this.entityClassName);
         list.forEach((el) => {

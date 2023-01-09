@@ -15,15 +15,10 @@ export class AppMessageService {
     }
 
     sendMessage(message: any) {
-        this.msgSendCnt++;
         return this.messageSource.next(message);
     }
 
-    showStats() {
-        console.log('Messages Sent: ' + this.msgSendCnt);
-    }
-
-    getObservable() {
+    messageQueueListener() {
         return this.currentMessage;
     }
 }

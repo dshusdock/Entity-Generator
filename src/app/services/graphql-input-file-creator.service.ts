@@ -2,46 +2,56 @@ import { Injectable } from '@angular/core';
 import { EntityInfoService } from './entity-info.service';
 
 @Injectable({
-  providedIn: 'root'
+    providedIn: 'root'
 })
 export class GraphqlInputFileCreatorService {
-  entityClassName = "";
+    entityClassName = "";
 
+    constructor(private readonly entityInfoSvc: EntityInfoService) { }
 
-  constructor(private readonly entityInfoSvc: EntityInfoService) { }
+    generateFile(): Blob {
+        let body: string = ``;
+        this.entityClassName = "BoPbiReport";
+        let nullableVal = "true";
+        
 
-  generateFile(): Blob {
-    let body: string = ``;
-    this.entityClassName = "BoPbiReport";
-    let nullableVal = "true";
+        let list: any[] = this.entityInfoSvc.getEntityListArray();
 
-    let list = this.entityInfoSvc.getEntityList();
+        //console.log("EntityList: " + JSON.stringify(list));
+        //let valList = buildValidatorList(list);
 
-    body = body + schema_header(this.entityClassName);
-    list.forEach((el) => {
-      if (el.entityDataType === "number") {
-        body = body + numberType();
-      } else {
-        body = body + stringOrBoolType();
-      }
+        body = body + schema_header(this.entityClassName);
 
-      body = body + `
+        // Loop Start
+        list.forEach((el) => {
+            if (el.entityDataType === "number") {
+                body = body + numberType();
+            } else {
+                body = body + stringOrBoolType();
+            }
+
+            body = body + `
         ${el.entityName}: ${el.entityDataType};
     
     `;
-    });
+        });
+        // Loop End
 
-    let fileContent = body + `
+        let fileContent = body + `
   }`;
 
-    const file = new Blob([fileContent], { type: "text/plain" });
-    return file;
-  }
+        const file = new Blob([fileContent], { type: "text/plain" });
+        return file;
+    }
+
+    buildValidatorList(list: any) {
+
+    }
 }
 
 
 function schema_header(schemaClassName: string) {
-  return `import { InputType, Int, Field } from '@nestjs/graphql';
+    return `import { InputType, Int, Field } from '@nestjs/graphql';
     import { IsNotEmpty, IsNumber } from 'class-validator';
     
     @InputType()
@@ -52,11 +62,11 @@ function schema_header(schemaClassName: string) {
 }
 
 function numberType() {
-  return `    @Field()
+    return `    @Field()
         @IsNumber()`;
 }
 
 function stringOrBoolType() {
-  return `    @Field()
+    return `    @Field()
         @IsNotEmpty()`;
 }

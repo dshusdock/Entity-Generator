@@ -4,6 +4,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTable, MatTableDataSource } from '@angular/material/table';
 import { EntityInfo } from 'src/app/constants/datatypes';
+import { AppMessageService } from 'src/app/services/app-message.service';
 import { EntityInfoService } from 'src/app/services/entity-info.service';
 import { EntityEditorComponent } from '../entity-editor/entity-editor.component';
 
@@ -27,13 +28,8 @@ export class EntityDisplayComponent implements OnInit, OnChanges, AfterViewInit 
     entityListCheckedCount = 0;
 
     constructor(private readonly entityInfoSvc: EntityInfoService,
-                private readonly dialog: MatDialog) { 
-
-    }
-
-    ngOnInit(): void {
-
-    }
+                private readonly dialog: MatDialog,
+                private readonly messageService: AppMessageService) { }
 
     ngOnChanges() {
         if (!this.entityValue) { return }
@@ -42,6 +38,7 @@ export class EntityDisplayComponent implements OnInit, OnChanges, AfterViewInit 
             entityName: this.entityValue.entityName,
             entityDataType: this.entityValue.entityDataType,
             entityNullable: this.entityValue.entityNullable,
+            entityValidators: [],
             checked: false
         }
 
@@ -51,8 +48,19 @@ export class EntityDisplayComponent implements OnInit, OnChanges, AfterViewInit 
             this.table.renderRows();
         }
 
-        this.entityInfoSvc.updateEntityInfo(this.entityList);
+        //this.entityInfoSvc.entityList = this.entityList;
         
+    }
+
+    ngOnInit(): void {
+        this.messageService.messageQueueListener().subscribe((msg) => {
+            this.processIncomingMessages(msg);
+        });
+
+    }
+
+    processIncomingMessages(msg: any) {
+
     }
 
     ngAfterViewInit() {

@@ -6,9 +6,16 @@
 }
 
 .tb-div1 {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
     height: idx.$toolbar-height;
 }
 
 .menu {
     margin-right: 2em;
+}
+
+.div-sec-1 {
+    margin-right: 5em;
 }

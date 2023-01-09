@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { RECIEVERS } from 'src/app/constants/datatypes';
+import { MessageItem } from 'src/app/constants/message-item';
+import { AppMessageService } from 'src/app/services/app-message.service';
 //import * as fs from 'fs';
 
 @Component({
@@ -8,10 +11,24 @@ import { Router } from '@angular/router';
     styleUrls: ['./top-toolbar.component.scss']
 })
 export class TopToolbarComponent implements OnInit {
+    entityClassName = "";
 
-    constructor(private router: Router) { }
+    constructor(
+        private router: Router,
+        private readonly messageService: AppMessageService
+    ) { }
 
     ngOnInit(): void {
+        this.messageService.messageQueueListener().subscribe((msg: any) => {
+            this.processIncomingMessages(msg);
+        });
+    }
+
+    processIncomingMessages(msg: MessageItem<any>) {
+        if (msg.reciever === RECIEVERS.TOOLBAR) {
+            this.entityClassName = msg.payload;
+        }
+        console.log("Got message: " + msg);
     }
 
     onCreateEntity() {

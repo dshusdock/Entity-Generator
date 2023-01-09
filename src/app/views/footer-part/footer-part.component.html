@@ -3,7 +3,7 @@
         <button mat-raised-button (click)="onGenerateClick()">Generate</button>
         <mat-form-field appearance="outline" class="mff-1">
             <mat-label>File to Download</mat-label>
-            <mat-select formControlName="fileChoice" placeholder="Data Type">
+            <mat-select #fileChoice formControlName="fileChoice" placeholder="Data Type" (selectionChange)="onSelectionChange(fileChoice.value)">
                 <mat-option value="entity.ts">Entity</mat-option>
                 <mat-option value="schema.ts">Schema</mat-option>
                 <mat-option value="input.ts">Input</mat-option>

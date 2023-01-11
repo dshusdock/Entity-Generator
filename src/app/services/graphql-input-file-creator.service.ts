@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { EntityInfo } from '../constants/datatypes';
 import { EntityInfoService } from './entity-info.service';
 
 @Injectable({
@@ -15,30 +16,21 @@ export class GraphqlInputFileCreatorService {
         let nullableVal = "true";
         
 
-        let list: any[] = this.entityInfoSvc.getEntityListArray();
-
-        //console.log("EntityList: " + JSON.stringify(list));
-        //let valList = buildValidatorList(list);
-
+        let list: EntityInfo[] = this.entityInfoSvc.getEntityListArray();
         body = body + schema_header(this.entityClassName);
 
         // Loop Start
         list.forEach((el) => {
-            if (el.entityDataType === "number") {
-                body = body + numberType();
-            } else {
-                body = body + stringOrBoolType();
-            }
+            body += `@Field()\n`
+            el.entityValidators.forEach((val) => {
+            body += `    ${val}\n`;
+            });
 
-            body = body + `
-        ${el.entityName}: ${el.entityDataType};
-    
-    `;
+            body = body + `    ${el.entityName}: ${el.entityDataType};\n\n    `;
         });
         // Loop End
 
-        let fileContent = body + `
-  }`;
+        let fileContent = body + `\n}`;
 
         const file = new Blob([fileContent], { type: "text/plain" });
         return file;
@@ -52,21 +44,11 @@ export class GraphqlInputFileCreatorService {
 
 function schema_header(schemaClassName: string) {
     return `import { InputType, Int, Field } from '@nestjs/graphql';
-    import { IsNotEmpty, IsNumber } from 'class-validator';
+import { IsNotEmpty, IsNumber } from 'class-validator';
     
-    @InputType()
-    export class Create${schemaClassName}Input {
+@InputType()
+export class Create${schemaClassName}Input {
       
     `;
 
-}
-
-function numberType() {
-    return `    @Field()
-        @IsNumber()`;
-}
-
-function stringOrBoolType() {
-    return `    @Field()
-        @IsNotEmpty()`;
 }

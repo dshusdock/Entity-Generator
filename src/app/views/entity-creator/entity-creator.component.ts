@@ -16,6 +16,7 @@ import { MessageItem } from 'src/app/constants/message-item';
 export class EntityCreatorComponent implements OnInit {
     entityItem: any;
     inputErrorforName = true;
+    addButtonDisable = true;
 
     dataForm = this.formBuilder.group({
         dataClassName: [''],
@@ -54,7 +55,8 @@ export class EntityCreatorComponent implements OnInit {
 
         switch (msg.msgtype) {
             case MSGTYPE.EVENT_VALIDATOR_UPDATE: {
-                this.handleValidatorUpdate(msg.payload);                break;
+                this.handleValidatorUpdate(msg.payload);
+                break;
             }
         }
     }
@@ -82,12 +84,14 @@ export class EntityCreatorComponent implements OnInit {
 
         // this.messageService.sendMessage(data);
         this.onClearClick();
+        this.addButtonDisable = true;
     }
 
     onClearClick() {
         this.entityForm.get('entityName')?.setValue('');
         this.entityForm.get('entityDataType')?.setValue('string');
         this.entityForm.get('entityNullable')?.setValue('');
+        this.entityForm.get('validators')?.setValue('');
     }
 
     onValidatorClick() {
@@ -130,6 +134,14 @@ export class EntityCreatorComponent implements OnInit {
     handleValidatorUpdate(data: any) {
         console.log("In handleValidatorUpdate: " + JSON.stringify(data));
         this.validators = data;
+    }
+
+    onEntityNameKeyUp(event: any) {
+        if (this.entityForm.get('entityName')?.value) {
+            this.addButtonDisable = false;
+        } else {
+            this.addButtonDisable = true;
+        }
     }
 
 }

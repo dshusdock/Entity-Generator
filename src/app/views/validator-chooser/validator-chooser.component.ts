@@ -16,19 +16,25 @@ export class ValidatorChooserComponent implements OnInit {
     dateVals = DATE_VALS;
     stringTypeVals = STRINGTYPE_VALS;
     validatorList: string[] = [];
-    
+
     displayedColumns: string[] = ['decorator'];
     valdationChoices: string[] = [];
 
-    constructor(private readonly appMessageService: AppMessageService) {}
+    constructor(private readonly appMessageService: AppMessageService) {
+        console.log("ValidatorChooserComponent created...");
+    }
 
-    ngOnInit(): void {}
+    ngOnInit(): void {
+        console.log("ValidatorChooserComponent ngOninit()");
+        this.validatorList.fill("");
+    }
 
     onMouseOver(e: any) {
         console.log('Got hover event: ' + e);
     }
 
     addItem(item: string) {
+        console.log("validatorlist size:" + this.validatorList.length);
         this.validatorList.push(item.trim());
     }
 
@@ -42,5 +48,5 @@ export class ValidatorChooserComponent implements OnInit {
         )
     }
 
-   
+
 }

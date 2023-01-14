@@ -18,7 +18,7 @@
   </div>
   <div class="area-b">
     <mat-card class="mc-1">
-      <div style="margin-left: 2em;">
+      <div>
         <mat-card-header style="margin-bottom: 2em;">Entity Parameters</mat-card-header>
         <mat-card-content>
           <form [formGroup]="entityForm" class="form-1">
@@ -41,6 +41,9 @@
             <mat-checkbox formControlName="entityNullable">Nullable?</mat-checkbox>
             <mat-checkbox formControlName="validators" (click)="onValidatorClick()">Validators?</mat-checkbox>
           </form>
+          <div style="margin-top: 1em;">
+            <mat-divider [inset]="true"></mat-divider>
+          </div>
         </mat-card-content>
         <mat-card-actions>
           <div>

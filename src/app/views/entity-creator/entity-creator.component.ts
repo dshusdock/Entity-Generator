@@ -84,7 +84,10 @@ export class EntityCreatorComponent implements OnInit {
 
         // this.messageService.sendMessage(data);
         this.onClearClick();
-        this.addButtonDisable = true;
+        if (!this.addButtonDisable) {
+            this.addButtonDisable = true;
+            this.validatorCheckbox = false;
+        } 
     }
 
     onClearClick() {

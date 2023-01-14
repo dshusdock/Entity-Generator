@@ -1,7 +1,9 @@
 <div class="frm-lo">
   <div class="area-a">
     <mat-card class="mc-1">
-      <mat-card-header style="margin: 0 30px 5px 0">Module Info</mat-card-header>
+      <mat-card-header class="mch-1">
+        <mat-card-title >Module Info</mat-card-title>
+      </mat-card-header>
       <mat-card-content>
         <form [formGroup]="dataForm">
           <mat-form-field appearance="outline" class="mff-1">
@@ -19,7 +21,9 @@
   <div class="area-b">
     <mat-card class="mc-1">
       <div>
-        <mat-card-header style="margin-bottom: 2em;">Entity Parameters</mat-card-header>
+        <mat-card-header class="mch-1">
+          <mat-card-title >Entity Info</mat-card-title>
+        </mat-card-header>
         <mat-card-content class="mcc-1">
           <form [formGroup]="entityForm" class="form-1">
             <mat-form-field appearance="outline" class="example-full-width">
@@ -48,8 +52,9 @@
             <p *ngFor="let el of validators">{{el}}</p>
           </div>
         </mat-card-content>
-        <mat-card-actions>
-          <div>
+       
+        <mat-card-actions style="margin-bottom: 0;">
+          <div class="btn-1">
             <button mat-raised-button [disabled]="cbAddButtonDisable" (click)="onAddClick()">Add</button>
             <button mat-raised-button style="margin-left: 2em;" (click)="onClearClick()">Clear</button>
           </div>

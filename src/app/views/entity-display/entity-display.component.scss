@@ -4,8 +4,16 @@ p {
     color: cornflowerblue;
 }
 
+.mch-1 {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
 .mc-1 {
     display: flex;
+    flex-direction: column;
     height: 90%;
     margin: 3em;
     overflow: hidden;
@@ -25,17 +33,18 @@ p {
     margin-right: 3em;
 }
 
-.mch-1 {
+/* .mch-1 {
     width: 45%;
     position: relative;
     // display: flex;
     // flex-direction: row;
-}
+} */
 
 .mca-1 {
     position: absolute;
     bottom: 2em;
-    left: 5em;
+    left: 1.5em;
+    width: 100%;
 }
 
 .mpag-1 {
@@ -73,4 +82,21 @@ p {
     width: 675px;
     max-width: 100%;
     overflow: auto;
+  }
+
+  .btn-1 {
+    // position: absolute;
+    // bottom: 5px;
+    margin-top: 1em;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    background-color: #383838;
+    border-radius: 5px;
+    width: 95%;
+  
+    button {
+      margin: 10px;
+      width: 7em;
+    }
   }

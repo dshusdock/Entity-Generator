@@ -1,6 +1,8 @@
 <div #entity_display>
   <mat-card class="mc-1">
-    <!-- <mat-card-header >Entity Parameters</mat-card-header> -->
+    <mat-card-header class="mch-1">
+      <mat-card-title >Entity List</mat-card-title>
+    </mat-card-header>
     <mat-card-content class="mcc-1 ">
       <div class="tab-div1">
         <table mat-table [dataSource]="entityList" class="mat-elevation-z8 demo-table">
@@ -43,7 +45,7 @@
       </div>
     </mat-card-content>
     <mat-card-actions class="mca-1">
-      <div>
+      <div class="btn-1">
         <button mat-raised-button [disabled]="isEditDisabled" (click)="onEdit()">Edit</button>
         <button mat-raised-button style="margin-left: 2em;" (click)="onDelete()">Delete</button>
       </div>

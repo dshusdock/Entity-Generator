@@ -33,8 +33,15 @@ export class ValidatorChooserComponent implements OnInit {
         console.log('Got hover event: ' + e);
     }
 
-    addItem(item: string) {
-        console.log("validatorlist size:" + this.validatorList.length);
+    checkBoxClick(item: string) {
+        
+        let index = this.validatorList.indexOf(item.trim());
+        if (index > -1) {
+            console.log("Item is already on the list - removing item");
+            this.validatorList.splice(index, 1);
+            return;
+        }
+
         this.validatorList.push(item.trim());
     }
 

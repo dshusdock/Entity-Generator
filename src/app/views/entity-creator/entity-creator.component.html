@@ -20,13 +20,13 @@
     <mat-card class="mc-1">
       <div>
         <mat-card-header style="margin-bottom: 2em;">Entity Parameters</mat-card-header>
-        <mat-card-content>
+        <mat-card-content class="mcc-1">
           <form [formGroup]="entityForm" class="form-1">
             <mat-form-field appearance="outline" class="example-full-width">
               <mat-label>Entity Name</mat-label>
               <input #entityNameInput matInput type="text" formControlName="entityName" placeholder="someEntity"
                 value="someEntity" (keyup)="onEntityNameKeyUp(entityNameInput.value)">
-              <mat-error *ngIf="inputErrorforName">
+              <mat-error *ngIf="cbInputErrorforName">
                 Please enter a valid entry
               </mat-error>
             </mat-form-field>
@@ -39,15 +39,18 @@
               </mat-select>
             </mat-form-field>
             <mat-checkbox formControlName="entityNullable">Nullable?</mat-checkbox>
+            <div style="margin: .5em 0 .5em 0;">
+              <mat-divider [inset]="true"></mat-divider>
+            </div>
             <mat-checkbox formControlName="validators" (click)="onValidatorClick()">Validators?</mat-checkbox>
           </form>
-          <div style="margin-top: 1em;">
-            <mat-divider [inset]="true"></mat-divider>
+          <div class="val-list">
+            <p *ngFor="let el of validators">{{el}}</p>
           </div>
         </mat-card-content>
         <mat-card-actions>
           <div>
-            <button mat-raised-button [disabled]="addButtonDisable" (click)="onAddClick()">Add</button>
+            <button mat-raised-button [disabled]="cbAddButtonDisable" (click)="onAddClick()">Add</button>
             <button mat-raised-button style="margin-left: 2em;" (click)="onClearClick()">Clear</button>
           </div>
         </mat-card-actions>
@@ -55,6 +58,6 @@
     </mat-card>
   </div>
   <div class="area-c">
-    <app-entity-display [entityValue]="entityItem"></app-entity-display>
+    <app-entity-display [entityValue]="caEntityItem"></app-entity-display>
   </div>
 </div>

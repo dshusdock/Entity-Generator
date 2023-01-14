@@ -14,9 +14,9 @@ import { MessageItem } from 'src/app/constants/message-item';
     styleUrls: ['./entity-creator.component.scss']
 })
 export class EntityCreatorComponent implements OnInit {
-    entityItem: any;
-    inputErrorforName = true;
-    addButtonDisable = true;
+    caEntityItem: any;
+    cbInputErrorforName = true;
+    cbAddButtonDisable = true;
 
     dataForm = this.formBuilder.group({
         dataClassName: [''],
@@ -80,12 +80,12 @@ export class EntityCreatorComponent implements OnInit {
         this.entityInfoSvc.entityList = data;
 
         // This updates the entity-display component
-        this.entityItem = data;
+        this.caEntityItem = data;
 
         // this.messageService.sendMessage(data);
         this.onClearClick();
-        if (!this.addButtonDisable) {
-            this.addButtonDisable = true;
+        if (!this.cbAddButtonDisable) {
+            this.cbAddButtonDisable = true;
             this.validatorCheckbox = false;
         } 
     }
@@ -95,12 +95,18 @@ export class EntityCreatorComponent implements OnInit {
         this.entityForm.get('entityDataType')?.setValue('string');
         this.entityForm.get('entityNullable')?.setValue('');
         this.entityForm.get('validators')?.setValue('');
+        if (this.validatorCheckbox) {
+            this.validatorCheckbox = false;
+            this.validators = [];
+            return;
+        }
     }
 
     onValidatorClick() {
 
         if (this.validatorCheckbox) {
             this.validatorCheckbox = false;
+            this.validators = [];
             return;
         }
 
@@ -141,9 +147,9 @@ export class EntityCreatorComponent implements OnInit {
 
     onEntityNameKeyUp(event: any) {
         if (this.entityForm.get('entityName')?.value) {
-            this.addButtonDisable = false;
+            this.cbAddButtonDisable = false;
         } else {
-            this.addButtonDisable = true;
+            this.cbAddButtonDisable = true;
         }
     }
 

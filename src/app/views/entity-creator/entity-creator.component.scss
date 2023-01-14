@@ -68,3 +68,24 @@
   ::ng-deep .custom-dialog-container .mat-dialog-container {
     overflow-y: hidden;
   }
+
+  .val-list {
+    margin-top: 5px;
+    height: 8em;
+    outline: 1px solid white;
+    border-radius: 5px;
+    overflow: auto;
+    max-width: 265px;
+   
+    p {
+      font-size: small;
+      margin: 0px 0 0 1em;
+      white-space: nowrap
+
+  
+    }
+  }
+
+  .mcc-1 {
+    width: 265px;
+  }

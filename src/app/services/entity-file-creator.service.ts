@@ -59,5 +59,5 @@ function numberType(nullableVal: string) {
 }
 
 function stringOrBoolType(nullableVal: string) {
-    return `@Field(() => Int, { nullable: ${nullableVal} , description: '' })`;
+    return `@Field({ nullable: ${nullableVal} , description: '' })`;
 }

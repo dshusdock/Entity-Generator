@@ -59,4 +59,8 @@ export class TopToolbarComponent implements OnInit {
 
     }
 
+    onTestClick() {
+        alert("This is a test");
+    }
+
 }

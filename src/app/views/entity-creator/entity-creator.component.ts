@@ -66,6 +66,10 @@ export class EntityCreatorComponent implements OnInit {
 
         data.entityName = this.entityForm.get('entityName')?.value;
         if (!data.entityName) { return };
+        if (this.entityInfoSvc.check4Duplicate(data.entityName)) {
+            alert("Duplicate Entity name");
+            return;
+        }
 
         data.entityDataType = this.entityForm.get('entityDataType')?.value;
         data.entityNullable = this.entityForm.get('entityNullable')?.value;

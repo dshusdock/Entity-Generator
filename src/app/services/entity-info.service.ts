@@ -29,4 +29,11 @@ export class EntityInfoService {
     public get entityClassName() {
         return this._entityClassName;
     }
+
+    check4Duplicate(name: string): boolean {
+        if (this._entityList.find(el => el.entityName === name )) {
+            return true;
+        }
+        return false;
+    }
 }

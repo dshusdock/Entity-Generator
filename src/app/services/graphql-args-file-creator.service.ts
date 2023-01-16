@@ -5,7 +5,7 @@ import { EntityInfoService } from './entity-info.service';
 @Injectable({
     providedIn: 'root'
 })
-export class GraphqlInputFileCreatorService {
+export class GraphqlArgsFileCreatorService {
     caValidatorImportList: string[] = [];
 
     constructor(private readonly entityInfoSvc: EntityInfoService) { }
@@ -37,7 +37,7 @@ export class GraphqlInputFileCreatorService {
 }
 
 function schema_class_header(schemaClassName: string) {
-    return `@InputType()
+    return `@ArgsType()
 export class Create${schemaClassName}Input {
       
     `;
@@ -45,7 +45,7 @@ export class Create${schemaClassName}Input {
 }
 
 function schema_import_header(importStr: string) {
-    let str1 = "import { InputType, Int, Field } from '@nestjs/graphql';\n";
+    let str1 = "import { ArgsType, Int, Field } from '@nestjs/graphql';\n";
     return str1 + `import { ${importStr} } from 'class-validator';\n\n`
     
 }

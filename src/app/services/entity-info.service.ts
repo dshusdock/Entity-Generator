@@ -14,10 +14,6 @@ export class EntityInfoService {
         this._entityList.push(entityList);
     }
 
-    // public get entityList(index): EntityInfo {
-    //     return this._entityList[index];
-    // }
-
     public getEntityListArray(): EntityInfo[] {
         return this._entityList;
     }
@@ -35,5 +31,30 @@ export class EntityInfoService {
             return true;
         }
         return false;
+    }
+
+    getValidatorImportStr(): string {
+        let valImportList = "";
+
+        this._entityList.forEach((el) => {
+            let valList = el.entityValidators;
+
+            valList.forEach((val) => {
+                console.log(`Working on Element: ${val}`);
+                
+                let rx = /^@(\w+)\(/g;
+                let arr = rx.exec(val);
+                
+                if (arr !== null) {
+                    let match = arr[1];
+                    if (!valImportList.includes(match)) {
+                        valImportList += `${match},`;
+                        console.log("-->" + valImportList);
+                    }
+                }
+            });
+
+        });
+        return valImportList;
     }
 }

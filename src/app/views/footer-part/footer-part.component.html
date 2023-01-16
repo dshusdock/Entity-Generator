@@ -4,9 +4,10 @@
         <mat-form-field appearance="outline" class="mff-1">
             <mat-label>File to Download</mat-label>
             <mat-select #fileChoice formControlName="fileChoice" placeholder="Data Type" (selectionChange)="onSelectionChange(fileChoice.value)">
-                <mat-option value="entity.ts">Entity</mat-option>
-                <mat-option value="schema.ts">Schema</mat-option>
-                <mat-option value="input.ts">Input</mat-option>
+                <mat-option value="schema.ts">Collection Schema (Mongo)</mat-option>
+                <mat-option value="entity.ts">Object Schema (GraphQL)</mat-option>                
+                <mat-option value="input.ts">Input Type Schema (GraphQL)</mat-option>
+                <mat-option value="args.ts">Argument Type Schema (GraphQL)</mat-option>
             </mat-select>
         </mat-form-field>
     </form>

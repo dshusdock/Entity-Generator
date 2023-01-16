@@ -5,6 +5,7 @@ import { FormBuilder } from '@angular/forms';
 import { SchemaFileCreatorService } from 'src/app/services/schema-file-creator.service';
 import { GraphqlInputFileCreatorService } from 'src/app/services/graphql-input-file-creator.service';
 import { EntityInfoService } from 'src/app/services/entity-info.service';
+import { GraphqlArgsFileCreatorService } from 'src/app/services/graphql-args-file-creator.service';
 
 
 @Component({
@@ -24,6 +25,7 @@ export class FooterPartComponent implements OnInit {
         private readonly entityFileCreatorSvc: EntityFileCreatorService,
         private readonly schemaFileCreatorService: SchemaFileCreatorService,
         private readonly graphqlInputFileCreatorService: GraphqlInputFileCreatorService,
+        private readonly graphqlArgsFileCreatorService: GraphqlArgsFileCreatorService,
         public readonly formBuilder: FormBuilder,
         public readonly entityInfoService: EntityInfoService
     ) { }
@@ -52,6 +54,11 @@ export class FooterPartComponent implements OnInit {
                 file = this.graphqlInputFileCreatorService.generateFile();
                 link.href = URL.createObjectURL(file);
                 link.download = `create.${className.toLowerCase()}.input.ts`;
+                break;
+            case "args.ts":
+                file = this.graphqlArgsFileCreatorService.generateFile();
+                link.href = URL.createObjectURL(file);
+                link.download = `create.${className.toLowerCase()}.args.ts`;
                 break;
 
         };

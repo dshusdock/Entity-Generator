@@ -100,3 +100,13 @@ p {
       width: 7em;
     }
   }
+
+  .my-tooltip {
+    white-space: pre-line;
+    font-size: small;
+  }
+
+  ::ng-deep .mat-tooltip  {
+    white-space: pre-line !important;
+    font-size: small;
+  }

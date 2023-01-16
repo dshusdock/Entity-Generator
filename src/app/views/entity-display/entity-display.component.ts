@@ -7,6 +7,8 @@ import { EntityInfo } from 'src/app/constants/datatypes';
 import { AppMessageService } from 'src/app/services/app-message.service';
 import { EntityInfoService } from 'src/app/services/entity-info.service';
 import { EntityEditorComponent } from '../entity-editor/entity-editor.component';
+import { LogService } from 'src/app/services/log.service';
+
 
 
 @Component({
@@ -26,10 +28,15 @@ export class EntityDisplayComponent implements OnInit, OnChanges, AfterViewInit 
     clearAllCB = false;
     isEditDisabled = false;
     entityListCheckedCount = 0;
+    logger: LogService;
+    desc = "This is a test";
 
     constructor(private readonly entityInfoSvc: EntityInfoService,
                 private readonly dialog: MatDialog,
-                private readonly messageService: AppMessageService) { }
+        private readonly messageService: AppMessageService) { 
+    
+        this.logger = new LogService(this);
+    }
 
     ngOnChanges() {
         if (!this.entityValue) { return }
@@ -121,6 +128,7 @@ export class EntityDisplayComponent implements OnInit, OnChanges, AfterViewInit 
             if (this.entityList[i].checked) {
                 this.entityList.splice(i, 1);
                 this.entityListCheckedCount--;
+                this.entityInfoSvc.deleteByIndex(i);
             }
         }
            
@@ -150,8 +158,6 @@ export class EntityDisplayComponent implements OnInit, OnChanges, AfterViewInit 
             this.entityList[index].entityName = result.entityName;
             this.entityList[index].entityDataType = result.entityDataType;
             this.entityList[index].entityNullable = result.entityNullable;
-            
-        
         });
     }
 
@@ -163,6 +169,21 @@ export class EntityDisplayComponent implements OnInit, OnChanges, AfterViewInit 
                 return false;
             }
         });
+    }
+
+    onMouseOver(index: number) {
+        
+        let list = this.entityInfoSvc.getEntityListArray();
+        let valList = list[index].entityValidators;
+        let str = "";
+
+        valList.forEach(el => {
+            str += `${el.toString()} 
+            `;
+        });
+        this.logger.log("OnMouseOver - " + index + ":" + valList.toString());
+        this.desc = str;
+        
     }
 
 

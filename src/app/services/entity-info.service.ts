@@ -57,4 +57,8 @@ export class EntityInfoService {
         });
         return valImportList;
     }
+
+    deleteByIndex(index: number) {
+        this._entityList.splice(index, 1);
+    } 
 }

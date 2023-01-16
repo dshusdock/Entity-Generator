@@ -17,9 +17,9 @@ export class ValidatorTableComponent implements OnInit {
     ngOnInit(): void {
     }
 
-    onMouseOver(e: any) {
+    onMouseOver(index: any) {
         // console.log('Got hover event: ' + e);
-        this.desc = this.tableData[e].desc;
+        this.desc = this.tableData[index].desc;
     }
 
     onClick(index: number) {

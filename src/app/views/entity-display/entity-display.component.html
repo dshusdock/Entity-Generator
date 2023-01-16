@@ -35,7 +35,14 @@
             <th mat-header-cell *matHeaderCellDef>
               <p>Validators</p>
             </th>
-            <td mat-cell *matCellDef="let element"> {{element.entityNullable}} </td>
+            <td 
+              mat-cell 
+              matTooltip="{{desc}}"
+              matTooltipClass="my-tooltip"
+              *matCellDef="let element; let i = index"
+              (mouseover)="onMouseOver(i)"
+              > {{element.entityNullable}} 
+            </td>
           </ng-container>
 
           <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true" ></tr>

@@ -11,11 +11,11 @@
             <input #classNameInput matInput type="text" formControlName="dataClassName" placeholder="someEntity"
               value="someEntity" (keyup)="onKeyUp(classNameInput.value)">
           </mat-form-field>
+          <mat-checkbox class="mod-frm-cb" formControlName="abstractRepositoryReqd">Abstract Repositry Provided</mat-checkbox>
+          <mat-checkbox class="mod-frm-cb" formControlName="mongoDBProvided">Mongo Database Provided</mat-checkbox>
+          <mat-checkbox class="mod-frm-cb" formControlName="graphQLProvided">GraphQL Provided</mat-checkbox>
         </form>
       </mat-card-content>
-      <!-- <mat-card-actions>
-        <button mat-raised-button (click)="onUpdateClick()">Update</button>
-      </mat-card-actions> -->
     </mat-card>
   </div>
   <div class="area-b">

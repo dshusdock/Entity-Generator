@@ -20,6 +20,9 @@ export class EntityCreatorComponent implements OnInit {
 
     dataForm = this.formBuilder.group({
         dataClassName: [''],
+        abstractRepositoryReqd: [''],
+        mongoDBProvided: [''],
+        graphQLProvided: ['']
     });
 
     entityForm = this.formBuilder.group({
@@ -49,6 +52,9 @@ export class EntityCreatorComponent implements OnInit {
 
         // Set default
         this.entityForm.get('entityDataType')?.setValue('string');
+        this.dataForm.get('abstractRepositoryReqd')?.setValue('true');
+        this.dataForm.get('mongoDBProvided')?.setValue('true');
+        this.dataForm.get('graphQLProvided')?.setValue('true');
     }
 
     processIncomingMessages(msg: MessageItem<any>) {
@@ -60,6 +66,7 @@ export class EntityCreatorComponent implements OnInit {
             }
         }
     }
+
 
     onAddClick() {
         let data: any = {};

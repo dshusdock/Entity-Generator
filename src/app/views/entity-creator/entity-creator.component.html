@@ -22,12 +22,12 @@
     <mat-card class="mc-1">
       <div>
         <mat-card-header class="mch-1">
-          <mat-card-title >Entity Info</mat-card-title>
+          <mat-card-title >Parameter Info</mat-card-title>
         </mat-card-header>
         <mat-card-content class="mcc-1">
           <form [formGroup]="entityForm" class="form-1">
             <mat-form-field appearance="outline" class="example-full-width">
-              <mat-label>Entity Name</mat-label>
+              <mat-label>Name</mat-label>
               <input #entityNameInput matInput type="text" formControlName="entityName" placeholder="someEntity"
                 value="someEntity" (keyup)="onEntityNameKeyUp(entityNameInput.value)">
               <mat-error *ngIf="cbInputErrorforName">

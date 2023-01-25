@@ -1,13 +1,21 @@
 import { Injectable } from '@angular/core';
+import { EntityInfoService } from './entity-info.service';
+
+const tmpltVals = {
+    name: '',
+    lowercaseName: ''
+}
 
 @Injectable({
     providedIn: 'root'
 })
 export class ServiceFileCreatorService {
 
-    constructor() { }
+    constructor(private readonly entityInfoSvc: EntityInfoService) { }
 
     generateFile(): Blob {
+        tmpltVals.name = this.entityInfoSvc.entityClassName;
+        tmpltVals.lowercaseName = tmpltVals.name.toLocaleLowerCase();
         const file = new Blob([serviceTmplt()], { type: "text/plain" });
         return file;
 
@@ -21,58 +29,58 @@ function serviceTmplt() {
     UnprocessableEntityException,
   } from '@nestjs/common';
 import * as bcrypt from 'bcrypt';
-import { GetUserArgs } from './dto/args/get-user-args.dto';
-import { CreateUserInput } from './dto/input/create-user-input.dto';
-import { User } from './models/user.model';
-import { UserDocument } from './models/user.schema';
-import { UsersRepository } from './users.repository';
+import { Get${tmpltVals.name}Args } from './dto/args/get-${tmpltVals.lowercaseName}-args.dto';
+import { Create${tmpltVals.name}Input } from './dto/input/create-${tmpltVals.lowercaseName}-input.dto';
+import { ${tmpltVals.name} } from './models/${tmpltVals.lowercaseName}.model';
+import { ${tmpltVals.name}Document } from './models/${tmpltVals.lowercaseName}.schema';
+import { ${tmpltVals.name}sRepository } from './${tmpltVals.lowercaseName}s.repository';
   
 @Injectable()
-export class UsersService {
-    constructor(private readonly usersRepository: UsersRepository) {}
+export class ${tmpltVals.name}sService {
+    constructor(private readonly ${tmpltVals.lowercaseName}sRepository: ${tmpltVals.name}sRepository) {}
   
-    async createUser(createUserData: CreateUserInput) {
-      await this.validateCreateUserData(createUserData);
-      const userDocument = await this.usersRepository.create({
-        ...createUserData,
-        password: await bcrypt.hash(createUserData.password, 10),
+    async create${tmpltVals.name}(create${tmpltVals.name}Data: Create${tmpltVals.name}Input) {
+      await this.validateCreate${tmpltVals.name}Data(create${tmpltVals.name}Data);
+      const ${tmpltVals.lowercaseName}Document = await this.${tmpltVals.lowercaseName}sRepository.create({
+        ...create${tmpltVals.name}Data,
+        password: await bcrypt.hash(create${tmpltVals.name}Data.password, 10),
       });
-      return this.toModel(userDocument);
+      return this.toModel(${tmpltVals.lowercaseName}Document);
     }
   
-    private async validateCreateUserData(createUserData: CreateUserInput) {
-      let user: UserDocument;
+    private async validateCreate${tmpltVals.name}Data(create${tmpltVals.name}Data: Create${tmpltVals.name}Input) {
+      let ${tmpltVals.lowercaseName}: ${tmpltVals.name}Document;
       try {
-        user = await this.usersRepository.findOne({
-          email: createUserData.email,
+        ${tmpltVals.lowercaseName} = await this.${tmpltVals.lowercaseName}sRepository.findOne({
+          email: create${tmpltVals.name}Data.email,
         });
       } catch (err) {}
-      if (user) {
+      if (${tmpltVals.lowercaseName}) {
         throw new UnprocessableEntityException('Email already exists.');
       }
     }
   
-    async getUser(getUserArgs: GetUserArgs) {
-      const userDocument = await this.usersRepository.findOne(getUserArgs);
-      return this.toModel(userDocument);
+    async get${tmpltVals.name}(get${tmpltVals.name}Args: Get${tmpltVals.name}Args) {
+      const ${tmpltVals.lowercaseName}Document = await this.${tmpltVals.lowercaseName}sRepository.findOne(get${tmpltVals.name}Args);
+      return this.toModel(${tmpltVals.lowercaseName}Document);
     }
   
-    async validateUser(email: string, password: string) {
-      const userDocument = await this.usersRepository.findOne({ email });
+    async validate${tmpltVals.name}(email: string, password: string) {
+      const ${tmpltVals.lowercaseName}Document = await this.${tmpltVals.lowercaseName}sRepository.findOne({ email });
       const passwordIsValid = await bcrypt.compare(
         password,
-        userDocument.password,
+        ${tmpltVals.lowercaseName}Document.password,
       );
       if (!passwordIsValid) {
         throw new UnauthorizedException('Credentials are not valid.');
       }
-      return this.toModel(userDocument);
+      return this.toModel(${tmpltVals.lowercaseName}Document);
     }
   
-    private toModel(userDocument: UserDocument): User {
+    private toModel(${tmpltVals.lowercaseName}Document: ${tmpltVals.name}Document): ${tmpltVals.name} {
       return {
-        _id: userDocument._id.toHexString(),
-        email: userDocument.email,
+        _id: ${tmpltVals.lowercaseName}Document._id.toHexString(),
+        email: ${tmpltVals.lowercaseName}Document.email,
       };
     }
 }

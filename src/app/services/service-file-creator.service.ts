@@ -15,14 +15,15 @@ export class ServiceFileCreatorService {
 
     generateFile(): Blob {
         tmpltVals.name = this.entityInfoSvc.entityClassName;
-        tmpltVals.lowercaseName = tmpltVals.name.toLocaleLowerCase();
-        const file = new Blob([serviceTmplt()], { type: "text/plain" });
+      tmpltVals.lowercaseName = tmpltVals.name.toLocaleLowerCase();
+      let list = this.entityInfoSvc.getEntityListArray();
+        const file = new Blob([serviceTmplt(list)], { type: "text/plain" });
         return file;
 
     }
 }
 
-function serviceTmplt() {
+function serviceTmplt(list: any[]) {
     return `import {
     Injectable,
     UnauthorizedException,
@@ -81,6 +82,7 @@ export class ${tmpltVals.name}sService {
       return {
         _id: ${tmpltVals.lowercaseName}Document._id.toHexString(),
         email: ${tmpltVals.lowercaseName}Document.email,
+        ${ list.forEach((el) => { console.log(el)}) }
       };
     }
 }

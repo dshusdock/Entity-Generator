@@ -15,11 +15,10 @@ export class ServiceFileCreatorService {
 
     generateFile(): Blob {
         tmpltVals.name = this.entityInfoSvc.entityClassName;
-      tmpltVals.lowercaseName = tmpltVals.name.toLocaleLowerCase();
-      let list = this.entityInfoSvc.getEntityListArray();
+        tmpltVals.lowercaseName = tmpltVals.name.toLocaleLowerCase();
+        let list = this.entityInfoSvc.getEntityListArray();
         const file = new Blob([serviceTmplt(list)], { type: "text/plain" });
         return file;
-
     }
 }
 

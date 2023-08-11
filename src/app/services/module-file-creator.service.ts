@@ -25,20 +25,24 @@ export class ModuleFileCreatorService {
 
 function moduleTmplt() {
     return `import { Module } from '@nestjs/common';
+    import { ${tmpltVals.name}Service } from './${tmpltVals.lowercaseName}.service';
+    import { ${tmpltVals.name}Controller } from './${tmpltVals.lowercaseName}.controller';
+
+    import { ${tmpltVals.name} } from './entities/${tmpltVals.lowercaseName}.model';
     import { MongooseModule } from '@nestjs/mongoose';
-    import { ${tmpltVals.name} } from './models/${tmpltVals.lowercaseName}.model';
-    import { ${tmpltVals.name}Schema } from './models/${tmpltVals.lowercaseName}.schema';
-    import { ${tmpltVals.name}sRepository } from './${tmpltVals.lowercaseName}s.repository';
-    import { ${tmpltVals.name}sResolver } from './${tmpltVals.lowercaseName}s.resolver';
-    import { ${tmpltVals.name}sService } from './${tmpltVals.lowercaseName}s.service';
+    import { ${tmpltVals.name}Schema } from './entities/${tmpltVals.lowercaseName}.schema';
+    import { ${tmpltVals.name}Repository } from './${tmpltVals.lowercaseName}.repository';
+    import { ${tmpltVals.name}Resolver } from './${tmpltVals.lowercaseName}.resolver';
+    
     
     @Module({
       imports: [
         MongooseModule.forFeature([{ name: ${tmpltVals.name}.name, schema: ${tmpltVals.name}Schema }]),
       ],
-      providers: [${tmpltVals.name}sResolver, ${tmpltVals.name}sService, ${tmpltVals.name}sRepository],
-      exports: [${tmpltVals.name}sService],
+      providers: [${tmpltVals.name}Resolver, ${tmpltVals.name}Service, ${tmpltVals.name}Repository],
+      exports: [${tmpltVals.name}Service],
     })
-    export class ${tmpltVals.name}sModule {}
+    export class ${tmpltVals.name}Module {}
     `;
 }
+

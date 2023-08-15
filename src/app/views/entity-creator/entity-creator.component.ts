@@ -7,6 +7,7 @@ import { ValidatorChooserComponent } from '../validator-chooser/validator-choose
 import { MatDialog } from '@angular/material/dialog';
 import { EntityInfoService } from 'src/app/services/entity-info.service';
 import { MessageItem } from 'src/app/constants/message-item';
+import { AppInfoService } from 'src/app/services/app-info.service';
 
 @Component({
     selector: 'app-entity-creator',
@@ -20,9 +21,9 @@ export class EntityCreatorComponent implements OnInit {
 
     dataForm = this.formBuilder.group({
         dataClassName: [''],
-        abstractRepositoryReqd: [''],
-        mongoDBProvided: [''],
-        graphQLProvided: ['']
+        abstractRepositorySupport: [''],
+        mongoDBSupport: [''],
+        graphQLSupport: ['']
     });
 
     entityForm = this.formBuilder.group({
@@ -42,7 +43,8 @@ export class EntityCreatorComponent implements OnInit {
         private readonly formBuilder: FormBuilder,
         private readonly messageService: AppMessageService,
         private readonly dialog: MatDialog,
-        private readonly entityInfoSvc: EntityInfoService
+        private readonly entityInfoSvc: EntityInfoService,
+        private readonly appInfoSvc: AppInfoService
     ) { }
 
     ngOnInit(): void {
@@ -52,9 +54,9 @@ export class EntityCreatorComponent implements OnInit {
 
         // Set default
         this.entityForm.get('entityDataType')?.setValue('string');
-        this.dataForm.get('abstractRepositoryReqd')?.setValue('true');
-        this.dataForm.get('mongoDBProvided')?.setValue('true');
-        this.dataForm.get('graphQLProvided')?.setValue('true');
+        this.dataForm.get('abstractRepositorySupport')?.setValue('false');
+        this.dataForm.get('mongoDBSupport')?.setValue('false');
+        this.dataForm.get('graphQLSupport')?.setValue('false');
     }
 
     processIncomingMessages(msg: MessageItem<any>) {
@@ -66,7 +68,6 @@ export class EntityCreatorComponent implements OnInit {
             }
         }
     }
-
 
     onAddClick() {
         let data: any = {};
@@ -164,4 +165,31 @@ export class EntityCreatorComponent implements OnInit {
         }
     }
 
+    inputChanged(element: HTMLElement) {
+        console.log(element.getAttribute('formControlName')) // item_name 
+    }
+
+    onCBChange() {
+        let val = this.dataForm.get('abstractRepositorySupport')?.value;
+        
+        if (val) {
+            this.appInfoSvc.abstractRepositorySupport = true;
+        } else {
+            this.appInfoSvc.abstractRepositorySupport = false;
+        }
+
+        val = this.entityForm.get('mongoDBSupport')?.value;
+        if (val === true) {
+            this.appInfoSvc.mongoDBSupport = true;
+        } else {
+            this.appInfoSvc.mongoDBSupport = false;
+        }
+
+        val = this.entityForm.get('graphQLSupport')?.value;
+        if (val === true) {
+            this.appInfoSvc.graphQLSupport = true;
+        } else {
+            this.appInfoSvc.graphQLSupport = false;
+        }
+    }
 }

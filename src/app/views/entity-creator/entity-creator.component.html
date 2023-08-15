@@ -10,14 +10,15 @@
             <mat-label>Data Class Name</mat-label>
             <input #classNameInput matInput type="text" formControlName="dataClassName" placeholder="someEntity"
               value="someEntity" (keyup)="onKeyUp(classNameInput.value)">
-          </mat-form-field>
-          <mat-checkbox class="mod-frm-cb" formControlName="abstractRepositoryReqd">Abstract Repositry Provided</mat-checkbox>
-          <mat-checkbox class="mod-frm-cb" formControlName="mongoDBProvided">Mongo Database Provided</mat-checkbox>
-          <mat-checkbox class="mod-frm-cb" formControlName="graphQLProvided">GraphQL Provided</mat-checkbox>
+          </mat-form-field>       
+          <mat-checkbox class="mod-frm-cb" formControlName="abstractRepositorySupport" (change)="onCBChange()">Abstract Repositry Support</mat-checkbox>
+          <mat-checkbox class="mod-frm-cb" formControlName="mongoDBSupport" (change)="onCBChange()">Mongo Database Support</mat-checkbox>
+          <mat-checkbox class="mod-frm-cb" formControlName="graphQLSupport" (change)="onCBChange()">GraphQL Support</mat-checkbox>
         </form>
       </mat-card-content>
     </mat-card>
   </div>
+
   <div class="area-b">
     <mat-card class="mc-1">
       <div>

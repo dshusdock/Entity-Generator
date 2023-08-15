@@ -10,6 +10,7 @@ import { ModuleFileCreatorService } from 'src/app/services/module-file-creator.s
 import { RepositoryFileCreatorService } from 'src/app/services/repository-file-creator.service';
 import { ResolverFileCreatorService } from 'src/app/services/resolver-file-creator.service';
 import { ServiceFileCreatorService } from 'src/app/services/service-file-creator.service';
+import { AppInfoService } from 'src/app/services/app-info.service';
 
 @Component({
     selector: 'app-footer-part',
@@ -17,7 +18,7 @@ import { ServiceFileCreatorService } from 'src/app/services/service-file-creator
     styleUrls: ['./footer-part.component.scss']
 })
 export class FooterPartComponent implements OnInit {
-
+    repoSupport: Boolean = true;
 
     fileForm = this.formBuilder.group({
         fileChoice: ['',],
@@ -34,10 +35,12 @@ export class FooterPartComponent implements OnInit {
         private readonly resolverFileCreatorService: ResolverFileCreatorService,
         private readonly serviceFileCreatorService: ServiceFileCreatorService,
         public readonly formBuilder: FormBuilder,
-        public readonly entityInfoService: EntityInfoService
+        public readonly entityInfoService: EntityInfoService,
+        private readonly appInfoSvc: AppInfoService
     ) { }
 
     ngOnInit(): void {
+        this.updateSupportedFlags();
     }
 
     onGenerateClick() {
@@ -45,6 +48,7 @@ export class FooterPartComponent implements OnInit {
         let file;
         const link = document.createElement("a");
         let className = this.entityInfoService.entityClassName;
+        this.updateSupportedFlags();
 
         switch (fileChoice) {
             case "entity.ts":
@@ -97,6 +101,19 @@ export class FooterPartComponent implements OnInit {
 
     onSelectionChange(event: any) {
         console.log("Got change event: " + event);
+        
     }
+
+    onSelectionClick() {
+        console.log("In onSelectionClick")
+        this.updateSupportedFlags();
+    }
+
+    updateSupportedFlags() {
+        this.repoSupport = this.appInfoSvc.abstractRepositorySupport;
+        console.log("repoSupport: " + this.repoSupport);
+    }
+
+    
 
 }

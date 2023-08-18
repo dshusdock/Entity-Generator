@@ -15,7 +15,7 @@ import { MAT_CHECKBOX_DEFAULT_OPTIONS, MatCheckboxDefaultOptions } from '@angula
 @NgModule({
   declarations: [
     AppComponent,
-    TestthisComponent
+    TestthisComponent,
   ],
   imports: [
     BrowserModule,

@@ -24,7 +24,7 @@ export class ModuleFileCreatorService {
 }
 
 function moduleTmplt() {
-    return `import { Module } from '@nestjs/common';
+    return `    import { Module } from '@nestjs/common';
     import { ${tmpltVals.name}Service } from './${tmpltVals.lowercaseName}.service';
     import { ${tmpltVals.name}Controller } from './${tmpltVals.lowercaseName}.controller';
 

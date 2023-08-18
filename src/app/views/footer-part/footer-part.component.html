@@ -1,6 +1,7 @@
 <mat-toolbar color="primary" class="mtb-1">
     <form [formGroup]="fileForm" class="form-1">
-        <button mat-raised-button (click)="onGenerateClick()">Generate</button>
+        <button mat-raised-button style="margin-right: 20px;"  (click)="onGenerateClick()">Generate</button>
+        <button mat-raised-button (click)="onPreviewClick()">Preview</button>
         <mat-form-field appearance="outline" class="mff-1" (click)="onSelectionClick()">
             <mat-label>File to Download</mat-label>
             <mat-select #fileChoice formControlName="fileChoice" placeholder="Data Type" (selectionChange)="onSelectionChange(fileChoice.value)" >
@@ -11,7 +12,7 @@
                 <mat-option value="module.ts">Module File</mat-option>
                 <mat-option value="service.ts">Service File</mat-option>
                 <mat-option *ngIf="repoSupport" value="repository.ts">Repositry File</mat-option>
-                <mat-option value="resolver.ts">Resolver File</mat-option>
+                <mat-option *ngIf="mongoSupport" value="resolver.ts">Resolver File</mat-option>
             </mat-select>
         </mat-form-field>
     </form>

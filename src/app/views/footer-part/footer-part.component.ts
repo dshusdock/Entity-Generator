@@ -11,6 +11,8 @@ import { RepositoryFileCreatorService } from 'src/app/services/repository-file-c
 import { ResolverFileCreatorService } from 'src/app/services/resolver-file-creator.service';
 import { ServiceFileCreatorService } from 'src/app/services/service-file-creator.service';
 import { AppInfoService } from 'src/app/services/app-info.service';
+import { MatDialog } from '@angular/material/dialog';
+import { PreviewDlgComponent } from '../preview-dlg/preview-dlg.component';
 
 @Component({
     selector: 'app-footer-part',
@@ -19,6 +21,8 @@ import { AppInfoService } from 'src/app/services/app-info.service';
 })
 export class FooterPartComponent implements OnInit {
     repoSupport: Boolean = true;
+    mongoSupport: Boolean = true;
+
 
     fileForm = this.formBuilder.group({
         fileChoice: ['',],
@@ -36,7 +40,8 @@ export class FooterPartComponent implements OnInit {
         private readonly serviceFileCreatorService: ServiceFileCreatorService,
         public readonly formBuilder: FormBuilder,
         public readonly entityInfoService: EntityInfoService,
-        private readonly appInfoSvc: AppInfoService
+        private readonly appInfoSvc: AppInfoService,
+        private readonly dialog: MatDialog,
     ) { }
 
     ngOnInit(): void {
@@ -94,7 +99,6 @@ export class FooterPartComponent implements OnInit {
 
         };
 
-
         link.click();
         link.remove();
     }
@@ -111,7 +115,54 @@ export class FooterPartComponent implements OnInit {
 
     updateSupportedFlags() {
         this.repoSupport = this.appInfoSvc.abstractRepositorySupport;
+        this.mongoSupport = this.appInfoSvc.mongoDBSupport;
+
         console.log("repoSupport: " + this.repoSupport);
+    }
+
+    onPreviewClick() {
+        let file;
+        let fileChoice = this.fileForm.get('fileChoice')?.value;
+        let className = this.entityInfoService.entityClassName;
+        this.updateSupportedFlags();
+
+        switch (fileChoice) {
+            case "entity.ts":
+                file = this.entityFileCreatorSvc.generateFile();               
+                break;
+            case "schema.ts":
+                file = this.schemaFileCreatorService.generateFile();
+                break;
+            case "input.ts":
+                file = this.graphqlInputFileCreatorService.generateFile();
+                break;
+            case "args.ts":
+                file = this.graphqlArgsFileCreatorService.generateFile();
+                break;
+            case "module.ts":
+                file = this.moduleFileCreatorService.generateFile();
+                break;
+            case "repository.ts":
+                file = this.repositoryFileCreatorService.generateFile();
+                break;
+            case "resolver.ts":
+                file = this.resolverFileCreatorService.generateFile();
+                break;
+            case "service.ts":
+                file = this.serviceFileCreatorService.generateFile();
+                break;
+
+        };
+        console.log(file?.text);
+
+        const dialogRef = this.dialog.open(PreviewDlgComponent, {
+            width: "1020px",
+            height: "900px",
+            data: file,
+            // position: { top: "50px", right: this.dialogRight },
+            // panelClass: 'custom-dialog-container'
+        });
+        
     }
 
     

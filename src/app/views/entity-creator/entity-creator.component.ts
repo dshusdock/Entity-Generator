@@ -169,23 +169,29 @@ export class EntityCreatorComponent implements OnInit {
         console.log(element.getAttribute('formControlName')) // item_name 
     }
 
-    onCBChange() {
+    onAbstractRepoCBChange() {
         let val = this.dataForm.get('abstractRepositorySupport')?.value;
-        
+        console.log("In onCBChange - abstractRepositorySupport:" + val)
         if (val) {
             this.appInfoSvc.abstractRepositorySupport = true;
         } else {
             this.appInfoSvc.abstractRepositorySupport = false;
         }
+    }
 
-        val = this.entityForm.get('mongoDBSupport')?.value;
+    onMongoCBChange() {
+        let val = this.entityForm.get('mongoDBSupport')?.value;
+        console.log("In onCBChange - mongoDBSupport:" + val)
         if (val === true) {
             this.appInfoSvc.mongoDBSupport = true;
         } else {
             this.appInfoSvc.mongoDBSupport = false;
         }
+    }
 
-        val = this.entityForm.get('graphQLSupport')?.value;
+    ongraphQLCBChange() {
+        let val = this.entityForm.get('graphQLSupport')?.value;
+        console.log("In onCBChange - graphQLSupport:" + val)
         if (val === true) {
             this.appInfoSvc.graphQLSupport = true;
         } else {

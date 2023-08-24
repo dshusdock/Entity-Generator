@@ -11,9 +11,9 @@
             <input #classNameInput matInput type="text" formControlName="dataClassName" placeholder="someEntity"
               value="someEntity" (keyup)="onKeyUp(classNameInput.value)">
           </mat-form-field>       
-          <mat-checkbox class="mod-frm-cb" formControlName="abstractRepositorySupport" (change)="onCBChange()">Abstract Repositry Support</mat-checkbox>
-          <mat-checkbox class="mod-frm-cb" formControlName="mongoDBSupport" (change)="onCBChange()">Mongo Database Support</mat-checkbox>
-          <mat-checkbox class="mod-frm-cb" formControlName="graphQLSupport" (change)="onCBChange()">GraphQL Support</mat-checkbox>
+          <mat-checkbox class="mod-frm-cb" formControlName="abstractRepositorySupport" (change)="onAbstractRepoCBChange()">Abstract Repositry Support</mat-checkbox>
+          <mat-checkbox class="mod-frm-cb" formControlName="mongoDBSupport" (change)="onMongoCBChange()">Mongo Database Support</mat-checkbox>
+          <mat-checkbox class="mod-frm-cb" formControlName="graphQLSupport" (change)="ongraphQLCBChange()">GraphQL Support</mat-checkbox>
         </form>
       </mat-card-content>
     </mat-card>

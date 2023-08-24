@@ -17,19 +17,30 @@ export class ModuleFileCreatorService {
                 private readonly appInfoSvc: AppInfoService) { }
 
     generateFile(): Blob {
+        console.log("+++++++++++++++++ ModuleFileCreatorService - generateFile +++++++++++++++++++++++");
+        this.bitMask=0;
         tmpltVals.name = this.entityInfoSvc.entityClassName;
         tmpltVals.lowercaseName = tmpltVals.name.toLocaleLowerCase();
 
         if (this.appInfoSvc.abstractRepositorySupport) {
             this.bitMask = this.bitMask | 4;
+            console.log("In generateFile - abstractRepositorySupport: " + this.appInfoSvc.abstractRepositorySupport)
+        } else {
+            console.log("abstractRepositorySupport is FALSE")
         }
         
         if (this.appInfoSvc.graphQLSupport) {
             this.bitMask = this.bitMask | 2;
+            console.log("In generateFile - graphQLSupport: " + this.appInfoSvc.graphQLSupport)
+        } else {
+            console.log("graphQLSupport is FALSE")
         }
 
         if (this.appInfoSvc.mongoDBSupport) {
-            this.bitMask = this.bitMask | 1
+            this.bitMask = this.bitMask | 1;
+            console.log("In generateFile - mongoDBSupport: " + this.appInfoSvc.mongoDBSupport)
+        } else {
+            console.log("mongoDBSupport is FALSE")
         }
 
         console.log("bitmask = " + this.bitMask);
@@ -72,22 +83,34 @@ function moduleTmplt2(bitMask: number) {
     import { ${tmpltVals.name}Service } from './${tmpltVals.lowercaseName}.service';
     import { ${tmpltVals.name}Controller } from './${tmpltVals.lowercaseName}.controller';
     import { ${tmpltVals.name} } from './entities/${tmpltVals.lowercaseName}.model';    
+    
     `,
         mongoose: `import { MongooseModule } from '@nestjs/mongoose';
     import { ${tmpltVals.name}Schema } from './entities/${tmpltVals.lowercaseName}.schema';
     import { ${tmpltVals.name}Repository } from './${tmpltVals.lowercaseName}.repository';
+    
     `,
         graphql: `import { ${tmpltVals.name}Resolver } from './${tmpltVals.lowercaseName}.resolver';
-    `,
+    
+        `,
         abstractRepo: ``
     }
 
     finalStr = HEADER.base;
 
     // Header Section
-    if (bitMask&1) {finalStr = finalStr + HEADER.mongoose;}
-    if (bitMask&2) {finalStr = finalStr + HEADER.graphql;}
-    if (bitMask&4) {finalStr = finalStr + HEADER.abstractRepo;}
+    if (bitMask&1) {
+        finalStr = finalStr + HEADER.mongoose;
+        console.log("HERE1")
+    }
+    if (bitMask&2) {
+        finalStr = finalStr + HEADER.graphql;
+        console.log("HERE2")
+    }
+    if (bitMask&4) {
+        finalStr = finalStr + HEADER.abstractRepo;
+        console.log("HERE3")
+    }
     
     return finalStr;
 }

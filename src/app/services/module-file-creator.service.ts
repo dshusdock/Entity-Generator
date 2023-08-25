@@ -17,33 +17,21 @@ export class ModuleFileCreatorService {
                 private readonly appInfoSvc: AppInfoService) { }
 
     generateFile(): Blob {
-        console.log("+++++++++++++++++ ModuleFileCreatorService - generateFile +++++++++++++++++++++++");
         this.bitMask=0;
         tmpltVals.name = this.entityInfoSvc.entityClassName;
         tmpltVals.lowercaseName = tmpltVals.name.toLocaleLowerCase();
 
         if (this.appInfoSvc.abstractRepositorySupport) {
             this.bitMask = this.bitMask | 4;
-            console.log("In generateFile - abstractRepositorySupport: " + this.appInfoSvc.abstractRepositorySupport)
-        } else {
-            console.log("abstractRepositorySupport is FALSE")
         }
         
         if (this.appInfoSvc.graphQLSupport) {
             this.bitMask = this.bitMask | 2;
-            console.log("In generateFile - graphQLSupport: " + this.appInfoSvc.graphQLSupport)
-        } else {
-            console.log("graphQLSupport is FALSE")
         }
 
         if (this.appInfoSvc.mongoDBSupport) {
             this.bitMask = this.bitMask | 1;
-            console.log("In generateFile - mongoDBSupport: " + this.appInfoSvc.mongoDBSupport)
-        } else {
-            console.log("mongoDBSupport is FALSE")
         }
-
-        console.log("bitmask = " + this.bitMask);
 
         const file = new Blob([moduleTmplt2(this.bitMask)], { type: "text/plain" });
         return file;
@@ -94,7 +82,7 @@ function moduleTmplt2(bitMask: number) {
 
     const MODULE_IMPORTS = {
         imports: `
-        
+
     @Module({
         imports: [`,
         mongoose: `MongooseModule.forFeature([

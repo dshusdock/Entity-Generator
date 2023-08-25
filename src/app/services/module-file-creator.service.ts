@@ -83,17 +83,32 @@ function moduleTmplt2(bitMask: number) {
     import { ${tmpltVals.name}Service } from './${tmpltVals.lowercaseName}.service';
     import { ${tmpltVals.name}Controller } from './${tmpltVals.lowercaseName}.controller';
     import { ${tmpltVals.name} } from './entities/${tmpltVals.lowercaseName}.model';    
-    
     `,
         mongoose: `import { MongooseModule } from '@nestjs/mongoose';
     import { ${tmpltVals.name}Schema } from './entities/${tmpltVals.lowercaseName}.schema';
-    import { ${tmpltVals.name}Repository } from './${tmpltVals.lowercaseName}.repository';
-    
     `,
         graphql: `import { ${tmpltVals.name}Resolver } from './${tmpltVals.lowercaseName}.resolver';
-    
-        `,
+    `,
+        abstractRepo: `import { ${tmpltVals.name}Repository } from './${tmpltVals.lowercaseName}.repository';`
+    }
+
+    const MODULE_IMPORTS = {
+        imports: `
+        
+    @Module({
+        imports: [`,
+        mongoose: `MongooseModule.forFeature([
+            { 
+                name: ${tmpltVals.name}.name, 
+                schema: ${tmpltVals.name}Schema 
+            }
+        ]),`,
+        graphql: ``,
         abstractRepo: ``
+    }
+
+    const MODULE_CONTROLLER = {
+        abstractRepo: `${tmpltVals.lowercaseName}.repository`
     }
 
     finalStr = HEADER.base;
@@ -101,17 +116,72 @@ function moduleTmplt2(bitMask: number) {
     // Header Section
     if (bitMask&1) {
         finalStr = finalStr + HEADER.mongoose;
-        console.log("HERE1")
     }
     if (bitMask&2) {
         finalStr = finalStr + HEADER.graphql;
-        console.log("HERE2")
     }
     if (bitMask&4) {
         finalStr = finalStr + HEADER.abstractRepo;
-        console.log("HERE3")
     }
-    
+
+    finalStr = finalStr + MODULE_IMPORTS.imports;
+
+    // Module Section - Imports
+    if (bitMask&1) {
+        finalStr = finalStr + MODULE_IMPORTS.mongoose;
+    }
+    if (bitMask&2) {
+        finalStr = finalStr + MODULE_IMPORTS.graphql;
+    }
+    if (bitMask&4) {
+        finalStr = finalStr + MODULE_IMPORTS.abstractRepo;
+    }
+
+    finalStr = finalStr + `],
+        controllers: [${tmpltVals.name}Controller,`;
+
+    // Module Section - Controllers
+    if (bitMask&1) {
+        // finalStr = finalStr + MODULE_IMPORTS.mongoose;
+    }
+    if (bitMask&2) {
+        // finalStr = finalStr + MODULE_IMPORTS.graphql;
+    }
+    if (bitMask&4) {
+        //finalStr = finalStr + MODULE_CONTROLLER.abstractRepo;
+    }
+
+    // Module Section - Providers
+    finalStr = finalStr + `],
+        providers: [${tmpltVals.name}Service, `;
+        
+    if (bitMask&1) {
+        // finalStr = finalStr + MODULE_IMPORTS.mongoose;
+    }
+    if (bitMask&2) {
+        // finalStr = finalStr + MODULE_IMPORTS.graphql;
+    }
+    if (bitMask&4) {
+        finalStr = finalStr + `${tmpltVals.name}Repository`;
+    }
+
+    // Module Section - Exports
+    finalStr = finalStr + `],
+        exports: [${tmpltVals.name}Service, `;
+    if (bitMask&1) {
+        // finalStr = finalStr + MODULE_IMPORTS.mongoose;
+    }
+    if (bitMask&2) {
+        // finalStr = finalStr + MODULE_IMPORTS.graphql;
+    }
+    if (bitMask&4) {
+            finalStr = finalStr + `${tmpltVals.name}Repository`;
+    }
+
+    finalStr = finalStr + `]
+    })
+    export class ${tmpltVals.name}Module`;
+
     return finalStr;
 }
 

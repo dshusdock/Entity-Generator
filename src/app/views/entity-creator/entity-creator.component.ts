@@ -180,9 +180,9 @@ export class EntityCreatorComponent implements OnInit {
     }
 
     onMongoCBChange() {
-        let val = this.entityForm.get('mongoDBSupport')?.value;
+        let val = this.dataForm.get('mongoDBSupport')?.value;
         console.log("In onCBChange - mongoDBSupport:" + val)
-        if (val === true) {
+        if (val) {
             this.appInfoSvc.mongoDBSupport = true;
         } else {
             this.appInfoSvc.mongoDBSupport = false;
@@ -190,9 +190,9 @@ export class EntityCreatorComponent implements OnInit {
     }
 
     ongraphQLCBChange() {
-        let val = this.entityForm.get('graphQLSupport')?.value;
+        let val = this.dataForm.get('graphQLSupport')?.value;
         console.log("In onCBChange - graphQLSupport:" + val)
-        if (val === true) {
+        if (val) {
             this.appInfoSvc.graphQLSupport = true;
         } else {
             this.appInfoSvc.graphQLSupport = false;

@@ -153,7 +153,6 @@ export class FooterPartComponent implements OnInit {
                 break;
 
         };
-        console.log(file?.text);
 
         const dialogRef = this.dialog.open(PreviewDlgComponent, {
             width: "1020px",

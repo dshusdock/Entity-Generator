@@ -13,6 +13,7 @@ import { ServiceFileCreatorService } from 'src/app/services/service-file-creator
 import { AppInfoService } from 'src/app/services/app-info.service';
 import { MatDialog } from '@angular/material/dialog';
 import { PreviewDlgComponent } from '../preview-dlg/preview-dlg.component';
+import { ControllerFileCreatorService } from 'src/app/services/controller-file-creator.service';
 
 @Component({
     selector: 'app-footer-part',
@@ -39,6 +40,7 @@ export class FooterPartComponent implements OnInit {
         private readonly repositoryFileCreatorService: RepositoryFileCreatorService,
         private readonly resolverFileCreatorService: ResolverFileCreatorService,
         private readonly serviceFileCreatorService: ServiceFileCreatorService,
+        private readonly controllerFileCreatorSvc: ControllerFileCreatorService,
         public readonly formBuilder: FormBuilder,
         public readonly entityInfoService: EntityInfoService,
         private readonly appInfoSvc: AppInfoService,
@@ -97,6 +99,11 @@ export class FooterPartComponent implements OnInit {
                 link.href = URL.createObjectURL(file);
                 link.download = `${className.toLowerCase()}.service.ts`;
                 break;
+            case "controller.ts":
+                file = this.controllerFileCreatorSvc.generateFile();
+                link.href = URL.createObjectURL(file);
+                link.download = `${className.toLowerCase()}.controller.ts`;
+                break;
 
         };
 
@@ -117,7 +124,7 @@ export class FooterPartComponent implements OnInit {
     updateSupportedFlags() {
         this.repoSupport = this.appInfoSvc.abstractRepositorySupport;
         this.mongoSupport = this.appInfoSvc.mongoDBSupport;
-        this.graphQLSupport = this.appInfoSvc.graphQLSupport;
+        // this.graphQLSupport = this.appInfoSvc.graphQLSupport;
 
         console.log("repoSupport: " + this.repoSupport);
     }
@@ -152,6 +159,9 @@ export class FooterPartComponent implements OnInit {
                 break;
             case "service.ts":
                 file = this.serviceFileCreatorService.generateFile();
+                break;
+            case "controller.ts":
+                file = this.controllerFileCreatorSvc.generateFile();
                 break;
 
         };

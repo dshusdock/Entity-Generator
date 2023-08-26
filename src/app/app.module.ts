@@ -11,6 +11,7 @@ import { SchemaFileCreatorService } from './services/schema-file-creator.service
 import { EntityInfoService } from './services/entity-info.service';
 import { TestthisComponent } from './testthis/testthis.component';
 import { MAT_CHECKBOX_DEFAULT_OPTIONS, MatCheckboxDefaultOptions } from '@angular/material/checkbox';
+import { ControllerFileCreatorService } from './services/controller-file-creator.service';
 
 @NgModule({
   declarations: [
@@ -24,8 +25,13 @@ import { MAT_CHECKBOX_DEFAULT_OPTIONS, MatCheckboxDefaultOptions } from '@angula
     MaterialModule,
     ViewsModule
   ],
-  providers: [AppMessageService, SchemaFileCreatorService, EntityInfoService,
-    {provide: MAT_CHECKBOX_DEFAULT_OPTIONS, useValue: { clickAction: 'check-indeterminate' } as MatCheckboxDefaultOptions}],
+  providers: [
+    AppMessageService,
+    SchemaFileCreatorService,
+    EntityInfoService,
+    ControllerFileCreatorService,
+    { provide: MAT_CHECKBOX_DEFAULT_OPTIONS, useValue: { clickAction: 'check-indeterminate' } as MatCheckboxDefaultOptions }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -69,11 +69,10 @@ function moduleTmplt2(bitMask: number) {
     const HEADER = {
         base: `    import { Module } from '@nestjs/common';
     import { ${tmpltVals.name}Service } from './${tmpltVals.lowercaseName}.service';
-    import { ${tmpltVals.name}Controller } from './${tmpltVals.lowercaseName}.controller';
-    import { ${tmpltVals.name} } from './entities/${tmpltVals.lowercaseName}.model';    
+    import { ${tmpltVals.name}Controller } from './${tmpltVals.lowercaseName}.controller'; 
     `,
         mongoose: `import { MongooseModule } from '@nestjs/mongoose';
-    import { ${tmpltVals.name}Schema } from './entities/${tmpltVals.lowercaseName}.schema';
+    import { ${tmpltVals.name}Schema, ${tmpltVals.name}Document } from './entities/${tmpltVals.lowercaseName}.schema';
     `,
         graphql: `import { ${tmpltVals.name}Resolver } from './${tmpltVals.lowercaseName}.resolver';
     `,

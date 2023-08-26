@@ -20,8 +20,9 @@ import { PreviewDlgComponent } from '../preview-dlg/preview-dlg.component';
     styleUrls: ['./footer-part.component.scss']
 })
 export class FooterPartComponent implements OnInit {
-    repoSupport: Boolean = true;
-    mongoSupport: Boolean = true;
+    repoSupport = true;
+    mongoSupport = true;
+    graphQLSupport = true; 
 
 
     fileForm = this.formBuilder.group({
@@ -116,6 +117,7 @@ export class FooterPartComponent implements OnInit {
     updateSupportedFlags() {
         this.repoSupport = this.appInfoSvc.abstractRepositorySupport;
         this.mongoSupport = this.appInfoSvc.mongoDBSupport;
+        this.graphQLSupport = this.appInfoSvc.graphQLSupport;
 
         console.log("repoSupport: " + this.repoSupport);
     }

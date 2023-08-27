@@ -3,7 +3,8 @@ import { EntityInfoService } from './entity-info.service';
 
 const tmpltVals = {
     name: '',
-    lowercaseName: ''
+    lowercaseName: '',
+    firstLetterLowerCase: ''
 }
 
 @Injectable({
@@ -16,6 +17,8 @@ export class ControllerFileCreatorService {
     generateFile(): Blob {
         tmpltVals.name = this.entityInfoSvc.entityClassName;
         tmpltVals.lowercaseName = tmpltVals.name.toLocaleLowerCase();
+        tmpltVals.firstLetterLowerCase = tmpltVals.name.charAt(0).toLowerCase() + 
+          tmpltVals.name.slice(1);
         const file = new Blob([repositoryTmplt2()], { type: "text/plain" });
         return file;
 
@@ -43,37 +46,37 @@ function repositoryTmplt() {
 
 function repositoryTmplt2() { 
     return `import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
-    import { TestdataService } from './testdata.service';
-    import { CreateTestdatumDto } from './dto/create-testdatum.dto';
-    import { UpdateTestdatumDto } from './dto/update-testdatum.dto';
+import { ${tmpltVals.name}Service } from './${tmpltVals.lowercaseName}.service';
+import { Create${tmpltVals.name}Dto } from './dto/create-${tmpltVals.lowercaseName}.dto';
+import { Update${tmpltVals.name}Dto } from './dto/update-${tmpltVals.lowercaseName}.dto';
     
-    @Controller('testdata')
-    export class TestdataController {
-      constructor(private readonly testdataService: TestdataService) {}
-    
-      @Post()
-      create(@Body() createTestdatumDto: CreateTestdatumDto) {
-        return this.testdataService.create(createTestdatumDto);
-      }
-    
-      @Get()
-      findAll() {
-        return this.testdataService.findAll();
-      }
-    
-      @Get(':id')
-      findOne(@Param('id') id: string) {
-        return this.testdataService.findOne(+id);
-      }
-    
-      @Patch(':id')
-      update(@Param('id') id: string, @Body() updateTestdatumDto: UpdateTestdatumDto) {
-        return this.testdataService.update(+id, updateTestdatumDto);
-      }
-    
-      @Delete(':id')
-      remove(@Param('id') id: string) {
-        return this.testdataService.remove(+id);
-      }
-    }`;
+@Controller('${tmpltVals.lowercaseName}')
+export class ${tmpltVals.name}Controller {
+    constructor(private readonly ${tmpltVals.firstLetterLowerCase}Svc: ${tmpltVals.name}Service) {}
+      
+    @Post()
+    create(@Body() create${tmpltVals.name}Dto: Create${tmpltVals.name}Dto) {
+        return ${tmpltVals.firstLetterLowerCase}Svc.create(create${tmpltVals.name}Dto);
+    }
+      
+    @Get()
+    findAll() {
+        return ${tmpltVals.firstLetterLowerCase}Svc.findAll();
+    }
+      
+    @Get(':id')
+    findOne(@Param('id') id: string) {
+        return ${tmpltVals.firstLetterLowerCase}Svc.findOne(+id);
+    }
+      
+    @Patch(':id')
+    update(@Param('id') id: string, @Body() update${tmpltVals.name}Dto: Update${tmpltVals.name}Dto) {
+        return ${tmpltVals.firstLetterLowerCase}Svc.update(+id, update${tmpltVals.name}Dto);
+    }
+      
+    @Delete(':id')
+    remove(@Param('id') id: string) {
+        return ${tmpltVals.firstLetterLowerCase}Svc.remove(+id);
+    }
+}`;
 }

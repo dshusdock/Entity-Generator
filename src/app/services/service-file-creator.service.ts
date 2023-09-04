@@ -17,7 +17,7 @@ export class ServiceFileCreatorService {
         tmpltVals.name = this.entityInfoSvc.entityClassName;
         tmpltVals.lowercaseName = tmpltVals.name.toLocaleLowerCase();
         let list = this.entityInfoSvc.getEntityListArray();
-        const file = new Blob([serviceTmplt(list)], { type: "text/plain" });
+        const file = new Blob([serviceTmplt2()], { type: "text/plain" });
         return file;
     }
 }
@@ -40,51 +40,78 @@ export class ${tmpltVals.name}sService {
     constructor(private readonly ${tmpltVals.lowercaseName}sRepository: ${tmpltVals.name}sRepository) {}
   
     async create${tmpltVals.name}(create${tmpltVals.name}Data: Create${tmpltVals.name}Input) {
-      await this.validateCreate${tmpltVals.name}Data(create${tmpltVals.name}Data);
-      const ${tmpltVals.lowercaseName}Document = await this.${tmpltVals.lowercaseName}sRepository.create({
-        ...create${tmpltVals.name}Data,
-        password: await bcrypt.hash(create${tmpltVals.name}Data.password, 10),
-      });
-      return this.toModel(${tmpltVals.lowercaseName}Document);
+        await this.validateCreate${tmpltVals.name}Data(create${tmpltVals.name}Data);
+            const ${tmpltVals.lowercaseName}Document = await this.${tmpltVals.lowercaseName}sRepository.create({
+                ...create${tmpltVals.name}Data,
+            password: await bcrypt.hash(create${tmpltVals.name}Data.password, 10),
+        });
+        return this.toModel(${tmpltVals.lowercaseName}Document);
     }
   
     private async validateCreate${tmpltVals.name}Data(create${tmpltVals.name}Data: Create${tmpltVals.name}Input) {
-      let ${tmpltVals.lowercaseName}: ${tmpltVals.name}Document;
-      try {
-        ${tmpltVals.lowercaseName} = await this.${tmpltVals.lowercaseName}sRepository.findOne({
-          email: create${tmpltVals.name}Data.email,
-        });
-      } catch (err) {}
-      if (${tmpltVals.lowercaseName}) {
-        throw new UnprocessableEntityException('Email already exists.');
-      }
+        let ${tmpltVals.lowercaseName}: ${tmpltVals.name}Document;
+        try {
+            ${tmpltVals.lowercaseName} = await this.${tmpltVals.lowercaseName}sRepository.findOne({
+                email: create${tmpltVals.name}Data.email,
+            });
+        } catch (err) {}
+        if (${tmpltVals.lowercaseName}) {
+            throw new UnprocessableEntityException('Email already exists.');
+        }
     }
   
     async get${tmpltVals.name}(get${tmpltVals.name}Args: Get${tmpltVals.name}Args) {
-      const ${tmpltVals.lowercaseName}Document = await this.${tmpltVals.lowercaseName}sRepository.findOne(get${tmpltVals.name}Args);
-      return this.toModel(${tmpltVals.lowercaseName}Document);
+        const ${tmpltVals.lowercaseName}Document = await this.${tmpltVals.lowercaseName}sRepository.findOne(get${tmpltVals.name}Args);
+        return this.toModel(${tmpltVals.lowercaseName}Document);
     }
   
     async validate${tmpltVals.name}(email: string, password: string) {
-      const ${tmpltVals.lowercaseName}Document = await this.${tmpltVals.lowercaseName}sRepository.findOne({ email });
-      const passwordIsValid = await bcrypt.compare(
-        password,
-        ${tmpltVals.lowercaseName}Document.password,
-      );
-      if (!passwordIsValid) {
-        throw new UnauthorizedException('Credentials are not valid.');
-      }
-      return this.toModel(${tmpltVals.lowercaseName}Document);
+        const ${tmpltVals.lowercaseName}Document = await this.${tmpltVals.lowercaseName}sRepository.findOne({ email });
+        const passwordIsValid = await bcrypt.compare(password,
+            ${tmpltVals.lowercaseName}Document.password,
+        );
+        if (!passwordIsValid) {
+            throw new UnauthorizedException('Credentials are not valid.');
+        }
+        return this.toModel(${tmpltVals.lowercaseName}Document);
     }
   
     private toModel(${tmpltVals.lowercaseName}Document: ${tmpltVals.name}Document): ${tmpltVals.name} {
-      return {
-        _id: ${tmpltVals.lowercaseName}Document._id.toHexString(),
-        email: ${tmpltVals.lowercaseName}Document.email,
-        ${ list.forEach((el) => { console.log(el)}) }
-      };
+        return { 
+            _id: ${tmpltVals.lowercaseName}Document._id.toHexString(),
+            email: ${tmpltVals.lowercaseName}Document.email,
+            ${ list.forEach((el) => { console.log(el)}) }
+        };
     }
 }
     `;
 }
 
+function serviceTmplt2() {
+    return `import { Injectable } from '@nestjs/common';
+    import { Create${tmpltVals.name}Dto } from './dto/create-${tmpltVals.lowercaseName}.dto';
+    import { Update${tmpltVals.name}Dto } from './dto/update-${tmpltVals.lowercaseName}.dto';
+    
+    @Injectable()
+    export class TestdataService {
+        create(create${tmpltVals.name}Dto: Create${tmpltVals.name}Dto) {
+          return {};
+        }
+      
+        findAll() {
+          return {};
+        }
+      
+        findOne(id: number) {
+          return {};
+        }
+      
+        update(id: number, update${tmpltVals.name}Dto: Update${tmpltVals.name}Dto) {
+          return {};
+        }
+      
+        remove(id: number) {
+          return {};
+        }
+    }`;
+}

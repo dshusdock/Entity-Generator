@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { EntityInfoService } from './entity-info.service';
+import { AppInfoService } from './app-info.service';
 
 const tmpltVals = {
     name: '',
@@ -11,13 +12,22 @@ const tmpltVals = {
 })
 export class ServiceFileCreatorService {
 
-    constructor(private readonly entityInfoSvc: EntityInfoService) { }
+    constructor(private readonly entityInfoSvc: EntityInfoService, private readonly appInfoSvc: AppInfoService) { }
 
     generateFile(): Blob {
+        let file: any = {};
+        let someFunc = serviceTmplt;
+
         tmpltVals.name = this.entityInfoSvc.entityClassName;
         tmpltVals.lowercaseName = tmpltVals.name.toLocaleLowerCase();
         let list = this.entityInfoSvc.getEntityListArray();
-        const file = new Blob([serviceTmplt2()], { type: "text/plain" });
+
+        if (this.appInfoSvc.mongoDBSupport) {
+            file = new Blob([serviceTmplt(list)], { type: "text/plain" });    
+        } else {
+            file = new Blob([serviceTmplt2()], { type: "text/plain" });
+        }
+        
         return file;
     }
 }
@@ -48,31 +58,8 @@ export class ${tmpltVals.name}sService {
         return this.toModel(${tmpltVals.lowercaseName}Document);
     }
   
-    private async validateCreate${tmpltVals.name}Data(create${tmpltVals.name}Data: Create${tmpltVals.name}Input) {
-        let ${tmpltVals.lowercaseName}: ${tmpltVals.name}Document;
-        try {
-            ${tmpltVals.lowercaseName} = await this.${tmpltVals.lowercaseName}sRepository.findOne({
-                email: create${tmpltVals.name}Data.email,
-            });
-        } catch (err) {}
-        if (${tmpltVals.lowercaseName}) {
-            throw new UnprocessableEntityException('Email already exists.');
-        }
-    }
-  
     async get${tmpltVals.name}(get${tmpltVals.name}Args: Get${tmpltVals.name}Args) {
         const ${tmpltVals.lowercaseName}Document = await this.${tmpltVals.lowercaseName}sRepository.findOne(get${tmpltVals.name}Args);
-        return this.toModel(${tmpltVals.lowercaseName}Document);
-    }
-  
-    async validate${tmpltVals.name}(email: string, password: string) {
-        const ${tmpltVals.lowercaseName}Document = await this.${tmpltVals.lowercaseName}sRepository.findOne({ email });
-        const passwordIsValid = await bcrypt.compare(password,
-            ${tmpltVals.lowercaseName}Document.password,
-        );
-        if (!passwordIsValid) {
-            throw new UnauthorizedException('Credentials are not valid.');
-        }
         return this.toModel(${tmpltVals.lowercaseName}Document);
     }
   
@@ -80,7 +67,7 @@ export class ${tmpltVals.name}sService {
         return { 
             _id: ${tmpltVals.lowercaseName}Document._id.toHexString(),
             email: ${tmpltVals.lowercaseName}Document.email,
-            ${ list.forEach((el) => { console.log(el)}) }
+            ${list.forEach((el) => { console.log(el) })}
         };
     }
 }

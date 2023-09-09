@@ -14,6 +14,7 @@ import { AppInfoService } from 'src/app/services/app-info.service';
 import { MatDialog } from '@angular/material/dialog';
 import { PreviewDlgComponent } from '../preview-dlg/preview-dlg.component';
 import { ControllerFileCreatorService } from 'src/app/services/controller-file-creator.service';
+import { CreateDtoFileCreatorService } from 'src/app/services/create-dto-file-creator.service';
 
 @Component({
     selector: 'app-footer-part',
@@ -41,6 +42,7 @@ export class FooterPartComponent implements OnInit {
         private readonly resolverFileCreatorService: ResolverFileCreatorService,
         private readonly serviceFileCreatorService: ServiceFileCreatorService,
         private readonly controllerFileCreatorSvc: ControllerFileCreatorService,
+        private readonly createDtoFileCreatorSvc: CreateDtoFileCreatorService,
         public readonly formBuilder: FormBuilder,
         public readonly entityInfoService: EntityInfoService,
         private readonly appInfoSvc: AppInfoService,
@@ -104,6 +106,11 @@ export class FooterPartComponent implements OnInit {
                 link.href = URL.createObjectURL(file);
                 link.download = `${className.toLowerCase()}.controller.ts`;
                 break;
+            case "create-dto.ts":
+                file = this.createDtoFileCreatorSvc.generateFile();
+                link.href = URL.createObjectURL(file);
+                link.download = `${className.toLowerCase()}.dto.ts`;
+                break;
 
         };
 
@@ -163,6 +170,9 @@ export class FooterPartComponent implements OnInit {
             case "controller.ts":
                 file = this.controllerFileCreatorSvc.generateFile();
                 break;
+            case "create-dto.ts":
+            file = this.createDtoFileCreatorSvc.generateFile();
+            break;
 
         };
 

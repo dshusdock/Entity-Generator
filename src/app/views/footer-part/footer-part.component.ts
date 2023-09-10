@@ -15,6 +15,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { PreviewDlgComponent } from '../preview-dlg/preview-dlg.component';
 import { ControllerFileCreatorService } from 'src/app/services/controller-file-creator.service';
 import { CreateDtoFileCreatorService } from 'src/app/services/create-dto-file-creator.service';
+import { UpdateDtoFileCreatorService } from 'src/app/services/update-dto-file-creator.service';
 
 @Component({
     selector: 'app-footer-part',
@@ -43,6 +44,7 @@ export class FooterPartComponent implements OnInit {
         private readonly serviceFileCreatorService: ServiceFileCreatorService,
         private readonly controllerFileCreatorSvc: ControllerFileCreatorService,
         private readonly createDtoFileCreatorSvc: CreateDtoFileCreatorService,
+        private readonly uppdateDtoFileCreatorSvc: UpdateDtoFileCreatorService,
         public readonly formBuilder: FormBuilder,
         public readonly entityInfoService: EntityInfoService,
         private readonly appInfoSvc: AppInfoService,
@@ -109,7 +111,12 @@ export class FooterPartComponent implements OnInit {
             case "create-dto.ts":
                 file = this.createDtoFileCreatorSvc.generateFile();
                 link.href = URL.createObjectURL(file);
-                link.download = `${className.toLowerCase()}.dto.ts`;
+                link.download = `create${className.toLowerCase()}.dto.ts`;
+                break;
+            case "update-dto.ts":
+                file = this.uppdateDtoFileCreatorSvc.generateFile();
+                link.href = URL.createObjectURL(file);
+                link.download = `update${className.toLowerCase()}.dto.ts`;
                 break;
 
         };
@@ -171,8 +178,11 @@ export class FooterPartComponent implements OnInit {
                 file = this.controllerFileCreatorSvc.generateFile();
                 break;
             case "create-dto.ts":
-            file = this.createDtoFileCreatorSvc.generateFile();
-            break;
+                file = this.createDtoFileCreatorSvc.generateFile();
+                break;
+            case "update-dto.ts":
+                file = this.uppdateDtoFileCreatorSvc.generateFile();
+                break;
 
         };
 

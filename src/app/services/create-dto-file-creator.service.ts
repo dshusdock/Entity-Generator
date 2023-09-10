@@ -20,11 +20,12 @@ export class CreateDtoFileCreatorService {
 
         // Loop Start
         list.forEach((el) => {
-            body += el.entityValidators.forEach((val) => {
-                body += `    ${val}\n`;
+            el.entityValidators.forEach((val) => {
+                body += `${val}
+    `;
             });
 
-            body = body + `    ${el.entityName}: ${el.entityDataType};\n\n    `;
+            body = body + `${el.entityName}: ${el.entityDataType};\n\n    `;
         });
         // Loop End
 

@@ -1,64 +1,45 @@
 import { Injectable } from '@angular/core';
+import { EntityInfo } from '../constants/datatypes';
 import { EntityInfoService } from './entity-info.service';
 
 @Injectable({
     providedIn: 'root'
 })
 export class EntityFileCreatorService {
-    entityClassName = "";
-    FIELD_STR_TYPE = "@Field({ nullable: true , description: '' })";
-    // FIELD_NBR_TYPE = `@Field(() => Int, { nullable: ${nullableVal} , description: '' })`;
-    FIELD_BOOL_TYPE = "@Field({ nullable: true , description: '' })";
+    caValidatorImportList: string[] = [];
 
     constructor(private readonly entityInfoSvc: EntityInfoService) { }
 
     generateFile(): Blob {
         let body: string = ``;
-        this.entityClassName = "BoPbiReport";
         let nullableVal = "true";
 
-        let list = this.entityInfoSvc.getEntityListArray();
+        let list: EntityInfo[] = this.entityInfoSvc.getEntityListArray();
+        // body = body + schema_import_header(this.entityInfoSvc.getValidatorImportStr());
+        body = body + schema_class_header(this.entityInfoSvc.entityClassName);
 
-        body = body + schema_header(this.entityClassName);
+        // Loop Start
         list.forEach((el) => {
-            if (el.entityDataType === "number") {
-                body = body + numberType(el.entityNullable? "true": "false");
-            } else if (el.entityDataType === "string") {
-                body = body + stringOrBoolType(el.entityNullable? "true": "false");
-            } else {
-                body = body + this.FIELD_BOOL_TYPE;
-            }
-
-            body = body + `
-    ${el.entityName}: ${el.entityDataType};
-    
-    `;
+            body = body + `${el.entityName}: ${el.entityDataType};\n\n    `;
         });
+        // Loop End
 
-        let fileContent = body + `
-  }`;
+        let fileContent = body + `\n}`;
 
         const file = new Blob([fileContent], { type: "text/plain" });
         return file;
     }
 }
 
-
-
-function schema_header(schemaClassName: string) {
-    return `import { ObjectType, Field, Int } from '@nestjs/graphql';
-
-  @ObjectType()
-  export class ${schemaClassName} {
-    
+function schema_class_header(schemaClassName: string) {
+    return `
+export class ${schemaClassName} {
+      
     `;
 
 }
 
-function numberType(nullableVal: string) {
-    return `@Field(() => Int, { nullable: ${nullableVal} , description: '' })`;
-}
-
-function stringOrBoolType(nullableVal: string) {
-    return `@Field({ nullable: ${nullableVal} , description: '' })`;
+function schema_import_header(importStr: string) {
+    return `import { ${importStr} } from 'class-validator';\n\n`
+    
 }

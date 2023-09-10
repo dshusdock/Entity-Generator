@@ -16,6 +16,7 @@ import { PreviewDlgComponent } from '../preview-dlg/preview-dlg.component';
 import { ControllerFileCreatorService } from 'src/app/services/controller-file-creator.service';
 import { CreateDtoFileCreatorService } from 'src/app/services/create-dto-file-creator.service';
 import { UpdateDtoFileCreatorService } from 'src/app/services/update-dto-file-creator.service';
+import { ObjectFileCreatorService } from 'src/app/services/object-file-creator.service';
 
 @Component({
     selector: 'app-footer-part',
@@ -45,6 +46,7 @@ export class FooterPartComponent implements OnInit {
         private readonly controllerFileCreatorSvc: ControllerFileCreatorService,
         private readonly createDtoFileCreatorSvc: CreateDtoFileCreatorService,
         private readonly uppdateDtoFileCreatorSvc: UpdateDtoFileCreatorService,
+        private readonly objectFileCreatorSvc: ObjectFileCreatorService,
         public readonly formBuilder: FormBuilder,
         public readonly entityInfoService: EntityInfoService,
         private readonly appInfoSvc: AppInfoService,
@@ -63,8 +65,8 @@ export class FooterPartComponent implements OnInit {
         this.updateSupportedFlags();
 
         switch (fileChoice) {
-            case "entity.ts":
-                file = this.entityFileCreatorSvc.generateFile();
+            case "object.ts":
+                file = this.objectFileCreatorSvc.generateFile();
                 link.href = URL.createObjectURL(file);
                 link.download = `${className.toLowerCase()}.entityfile.ts`;
                 break;
@@ -118,6 +120,11 @@ export class FooterPartComponent implements OnInit {
                 link.href = URL.createObjectURL(file);
                 link.download = `update${className.toLowerCase()}.dto.ts`;
                 break;
+            case "entity.ts":
+                file = this.entityFileCreatorSvc.generateFile();
+                link.href = URL.createObjectURL(file);
+                link.download = `update${className.toLowerCase()}.dto.ts`;
+                break;
 
         };
 
@@ -150,7 +157,7 @@ export class FooterPartComponent implements OnInit {
         this.updateSupportedFlags();
 
         switch (fileChoice) {
-            case "entity.ts":
+            case "object.ts":
                 file = this.entityFileCreatorSvc.generateFile();               
                 break;
             case "schema.ts":
@@ -182,6 +189,9 @@ export class FooterPartComponent implements OnInit {
                 break;
             case "update-dto.ts":
                 file = this.uppdateDtoFileCreatorSvc.generateFile();
+                break;
+            case "entity.ts":
+                file = this.entityFileCreatorSvc.generateFile();
                 break;
 
         };

@@ -10,10 +10,11 @@
                 <mat-option value="controller.ts">Controller File</mat-option>
                 <mat-option value="create-dto.ts">Create DTO File</mat-option>
                 <mat-option value="update-dto.ts">Update DTO File</mat-option>
+                <mat-option value="entity.ts">Entity File</mat-option>
                 <mat-option *ngIf="mongoSupport" value="schema.ts">Entity Schema (Mongo)</mat-option>
                 <mat-option *ngIf="mongoSupport" value="resolver.ts">Resolver File (Mongo)</mat-option>
                 <mat-option *ngIf="repoSupport" value="repository.ts">Repository File (Repo)</mat-option>
-                <mat-option *ngIf="graphQLSupport" value="entity.ts">Object Schema (GraphQL)</mat-option>
+                <mat-option *ngIf="graphQLSupport" value="object.ts">Object Schema (GraphQL)</mat-option>
                 <mat-option *ngIf="graphQLSupport" value="input.ts">Input Type Schema (GraphQL)</mat-option>
                 <mat-option *ngIf="graphQLSupport" value="args.ts">Argument Type Schema (GraphQL)</mat-option>
             </mat-select>
